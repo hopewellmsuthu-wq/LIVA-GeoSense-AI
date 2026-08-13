@@ -1,0 +1,27 @@
+{
+  "runtime": {
+    "name": "llama.cpp",
+    "server_host": "127.0.0.1",
+    "server_port": 8080,
+    "endpoint": "/v1/chat/completions"
+  },
+
+  "model": {
+    "format": "GGUF",
+    "path": "models/model.gguf",
+    "temperature": 0.2,
+    "top_p": 0.9,
+    "max_tokens": 512
+  },
+
+  "inference": {
+    "context_size": 4096,
+    "threads": 4,
+    "gpu_layers": 0
+  },
+
+  "operation": {
+    "offline_only": true,
+    "external_api": false
+  }
+}
