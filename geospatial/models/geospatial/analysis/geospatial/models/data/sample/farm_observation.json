@@ -1,0 +1,28 @@
+{
+  "farm": {
+    "id": "LGS-DEMO-001",
+    "name": "LIVA GeoSense Demonstration Farm",
+    "country": "South Africa",
+    "province": "Eastern Cape",
+    "crop": "Maize",
+    "area_hectares": 12.5
+  },
+
+  "location": {
+    "latitude": -31.5833,
+    "longitude": 28.7833
+  },
+
+  "observation": {
+    "date": "2026-08-13",
+    "previous_ndvi": 0.68,
+    "current_ndvi": 0.49,
+    "rainfall_mm": 42.0,
+    "soil_moisture": 31.5
+  },
+
+  "analysis_context": {
+    "observation_type": "synthetic_demo_data",
+    "purpose": "LIVA GeoSense MVP testing"
+  }
+}
