@@ -1,3 +1,8 @@
+
+from ai.context.geosense_context import (
+    build_ai_context
+)
+
 """
 LIVA GeoSense
 Phase 1C.7 - GeoSense Intelligence Pipeline
@@ -288,10 +293,22 @@ def main():
         save_report(
             report
         )
-
+ai_context = build_ai_context(
+    report
+)
+save_ai_context(
+    ai_context
+)
         display_summary(
             report
         )
+print(
+    f"AI context saved to:"
+)
+
+print(
+    f"{AI_CONTEXT_FILE}"
+)
 
     except (
         FileNotFoundError,
@@ -318,4 +335,24 @@ if __name__ == "__main__":
 
     sys.exit(
         main()
+)
+
+AI_CONTEXT_FILE = (
+    OUTPUT_DIR
+    / "ai_context.json"
+)
+
+def save_ai_context(context):
+
+    with open(
+        AI_CONTEXT_FILE,
+        "w",
+        encoding="utf-8"
+    ) as file:
+
+        json.dump(
+            context,
+            file,
+            indent=2,
+            ensure_ascii=False
 )
