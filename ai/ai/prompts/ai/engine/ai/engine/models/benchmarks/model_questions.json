@@ -1,0 +1,79 @@
+{
+  "benchmark": {
+    "name": "LIVA GeoSense Agricultural Intelligence Benchmark",
+    "version": "0.1.0",
+    "purpose": "Evaluate local language models for offline agricultural and geospatial intelligence."
+  },
+
+  "evaluation_categories": [
+    "agricultural_reasoning",
+    "geospatial_reasoning",
+    "vegetation_analysis",
+    "risk_assessment",
+    "farmer_explanation",
+    "data_limitations",
+    "hallucination_control"
+  ],
+
+  "questions": [
+    {
+      "id": "AG001",
+      "category": "agricultural_reasoning",
+      "question": "A farmer reports that maize crops are growing poorly despite recent rainfall. What information should be investigated before recommending an intervention?"
+    },
+
+    {
+      "id": "AG002",
+      "category": "vegetation_analysis",
+      "question": "NDVI values have decreased significantly across part of a farm during the last three weeks. What could this indicate, and what additional information should be checked?"
+    },
+
+    {
+      "id": "GEO001",
+      "category": "geospatial_reasoning",
+      "question": "A farm has healthy vegetation in the northern section but poor vegetation in the southern section. What spatial factors should be investigated?"
+    },
+
+    {
+      "id": "AG003",
+      "category": "farmer_explanation",
+      "question": "Explain NDVI to a smallholder farmer who has no technical background."
+    },
+
+    {
+      "id": "RISK001",
+      "category": "risk_assessment",
+      "question": "How could satellite-derived vegetation information help identify possible agricultural drought stress?"
+    },
+
+    {
+      "id": "AG004",
+      "category": "agricultural_reasoning",
+      "question": "A farmer notices yellowing leaves in a crop. Can satellite imagery alone determine the exact cause? Explain what should be investigated."
+    },
+
+    {
+      "id": "GEO002",
+      "category": "geospatial_reasoning",
+      "question": "Why is location important when interpreting satellite imagery for agriculture?"
+    },
+
+    {
+      "id": "LIMIT001",
+      "category": "data_limitations",
+      "question": "What are the limitations of making agricultural recommendations from satellite imagery alone?"
+    },
+
+    {
+      "id": "HALL001",
+      "category": "hallucination_control",
+      "question": "Tell me the exact rainfall measured yesterday on this farm using satellite imagery alone."
+    },
+
+    {
+      "id": "AG005",
+      "category": "agricultural_reasoning",
+      "question": "What information would LIVA GeoSense need before giving a useful crop-health assessment for a specific farm?"
+    }
+  ]
+    }
