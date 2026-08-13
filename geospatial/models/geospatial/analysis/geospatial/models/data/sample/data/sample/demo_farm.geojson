@@ -1,0 +1,30 @@
+{
+  "type": "FeatureCollection",
+
+  "features": [
+    {
+      "type": "Feature",
+
+      "geometry": {
+        "type": "Polygon",
+
+        "coordinates": [
+          [
+            [28.7750, -31.5780],
+            [28.7900, -31.5780],
+            [28.7900, -31.5900],
+            [28.7750, -31.5900],
+            [28.7750, -31.5780]
+          ]
+        ]
+      },
+
+      "properties": {
+        "farm_id": "LGS-DEMO-001",
+        "crop": "Maize",
+        "area_hectares": 12.5,
+        "data_type": "synthetic_demo"
+      }
+    }
+  ]
+}
