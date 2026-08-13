@@ -89,6 +89,7 @@ class GeoSenseOrchestrator:
             raise ValueError(
                 "GeoSense report cannot be empty."
             )
+            
 
         if not farmer_question:
 
@@ -103,6 +104,12 @@ class GeoSenseOrchestrator:
         context = build_ai_context(
             geosense_report
         )
+        evidence_engine = EvidenceEngine(
+    context
+)
+
+evidence = evidence_engine.generate()
+"evidence": evidence,
 
         # -------------------------------------------------
         # STEP 2 — BUILD ADVISORY REQUEST
