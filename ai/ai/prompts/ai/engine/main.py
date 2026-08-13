@@ -1,26 +1,17 @@
 """
 LIVA GeoSense AI
-Offline AI Engine - Phase 1 MVP
+Phase 1B - Local Model Integration
 
-This module provides the foundation for the LIVA GeoSense
-offline intelligence system.
+Connects the LIVA GeoSense engine to a local llama.cpp server.
 
-Current phase:
-- Loads runtime configuration
-- Loads the system prompt
-- Validates user input
-- Builds an AI-ready prompt
-- Provides a development/demo response
-
-Future phase:
-- Connect to llama.cpp
-- Load a local GGUF model
-- Perform real offline inference
+No cloud AI API is used.
 """
 
 from pathlib import Path
 import json
 import sys
+import urllib.request
+import urllib.error
 
 
 # ---------------------------------------------------------
@@ -31,38 +22,50 @@ ENGINE_DIR = Path(__file__).resolve().parent
 AI_DIR = ENGINE_DIR.parent
 
 CONFIG_FILE = ENGINE_DIR / "config" / "runtime.json"
+MODEL_CONFIG_FILE = ENGINE_DIR / "config" / "model.json"
+
 PROMPT_FILE = AI_DIR / "prompts" / "system_prompt.txt"
 
 
 # ---------------------------------------------------------
-# CONFIGURATION
+# LOAD JSON
 # ---------------------------------------------------------
 
-def load_config():
-    """Load the LIVA GeoSense runtime configuration."""
+def load_json(file_path):
 
-    if not CONFIG_FILE.exists():
+    if not file_path.exists():
+
         raise FileNotFoundError(
-            f"Runtime configuration not found: {CONFIG_FILE}"
+            f"Configuration not found: {file_path}"
         )
 
-    with open(CONFIG_FILE, "r", encoding="utf-8") as file:
+    with open(
+        file_path,
+        "r",
+        encoding="utf-8"
+    ) as file:
+
         return json.load(file)
 
 
 # ---------------------------------------------------------
-# SYSTEM PROMPT
+# LOAD SYSTEM PROMPT
 # ---------------------------------------------------------
 
 def load_system_prompt():
-    """Load the LIVA GeoSense AI system instructions."""
 
     if not PROMPT_FILE.exists():
+
         raise FileNotFoundError(
             f"System prompt not found: {PROMPT_FILE}"
         )
 
-    with open(PROMPT_FILE, "r", encoding="utf-8") as file:
+    with open(
+        PROMPT_FILE,
+        "r",
+        encoding="utf-8"
+    ) as file:
+
         return file.read().strip()
 
 
@@ -71,200 +74,290 @@ def load_system_prompt():
 # ---------------------------------------------------------
 
 def validate_input(user_input):
-    """
-    Validate user input before it reaches the AI engine.
-    """
 
     if user_input is None:
+
         return False, "No input was provided."
 
     user_input = user_input.strip()
 
     if not user_input:
+
         return False, "Please enter a question."
 
     if len(user_input) > 4000:
-        return False, "Input is too long. Maximum length is 4000 characters."
+
+        return False, (
+            "Input is too long. "
+            "Maximum length is 4000 characters."
+        )
 
     return True, user_input
 
 
 # ---------------------------------------------------------
-# PROMPT BUILDER
+# CHECK LOCAL AI SERVER
 # ---------------------------------------------------------
 
-def build_prompt(system_prompt, user_input):
-    """
-    Combine the system instructions with the user's question.
-    """
+def check_server(model_config):
 
-    return f"""
-{system_prompt}
+    runtime = model_config["runtime"]
 
-USER QUERY:
-{user_input}
+    host = runtime["server_host"]
+    port = runtime["server_port"]
 
-LIVA GEOSENSE RESPONSE:
-""".strip()
+    url = f"http://{host}:{port}/health"
 
+    request = urllib.request.Request(
+        url,
+        method="GET"
+    )
 
-# ---------------------------------------------------------
-# DEVELOPMENT RESPONSE
-# ---------------------------------------------------------
+    try:
 
-def development_response(user_input):
-    """
-    Temporary response used while the local GGUF model
-    has not yet been connected.
+        with urllib.request.urlopen(
+            request,
+            timeout=5
+        ) as response:
 
-    This allows us to test the application architecture
-    without requiring an AI model.
-    """
+            return response.status == 200
 
-    return f"""
-LIVA GeoSense Development Mode
+    except (
+        urllib.error.URLError,
+        TimeoutError
+    ):
 
-Your question:
-{user_input}
-
-The AI inference engine is currently running in
-development mode.
-
-The next engine phase will connect LIVA GeoSense
-to a local GGUF language model through llama.cpp.
-
-OFFLINE STATUS:
-Ready
-
-MODEL STATUS:
-Not loaded
-
-GEOSPATIAL ENGINE:
-Development
-
-AGRICULTURAL ENGINE:
-Development
-""".strip()
+        return False
 
 
 # ---------------------------------------------------------
-# ENGINE STATUS
+# LOCAL AI INFERENCE
 # ---------------------------------------------------------
 
-def get_engine_status(config):
-    """Return the current engine configuration."""
+def ask_local_model(
+    question,
+    system_prompt,
+    model_config
+):
 
-    return {
-        "application": config["application"]["name"],
-        "version": config["application"]["version"],
-        "mode": config["application"]["mode"],
-        "runtime": config["model"]["runtime"],
-        "model_format": config["model"]["format"],
-        "target_os": config["hardware"]["target_os"],
-        "cpu_inference": config["hardware"]["cpu_inference"],
-        "gpu_required": config["hardware"]["gpu_required"],
-        "offline_only": config["privacy"]["offline_only"],
-        "external_ai_api": config["privacy"]["external_ai_api"]
+    runtime = model_config["runtime"]
+    model = model_config["model"]
+
+    host = runtime["server_host"]
+    port = runtime["server_port"]
+
+    endpoint = runtime["endpoint"]
+
+    url = (
+        f"http://{host}:{port}"
+        f"{endpoint}"
+    )
+
+    payload = {
+
+        "messages": [
+
+            {
+                "role": "system",
+                "content": system_prompt
+            },
+
+            {
+                "role": "user",
+                "content": question
+            }
+
+        ],
+
+        "temperature": model["temperature"],
+
+        "top_p": model["top_p"],
+
+        "max_tokens": model["max_tokens"],
+
+        "stream": False
     }
 
+    data = json.dumps(
+        payload
+    ).encode("utf-8")
+
+    request = urllib.request.Request(
+
+        url,
+
+        data=data,
+
+        headers={
+            "Content-Type": "application/json"
+        },
+
+        method="POST"
+    )
+
+    try:
+
+        with urllib.request.urlopen(
+            request,
+            timeout=120
+        ) as response:
+
+            result = json.loads(
+                response.read().decode("utf-8")
+            )
+
+        return result[
+            "choices"
+        ][0][
+            "message"
+        ][
+            "content"
+        ]
+
+    except urllib.error.URLError as error:
+
+        return (
+            "Unable to connect to the local "
+            "LIVA GeoSense AI model.\n\n"
+            f"Error: {error}"
+        )
+
+    except (
+        KeyError,
+        IndexError,
+        json.JSONDecodeError
+    ):
+
+        return (
+            "The local AI server returned "
+            "an unexpected response."
+        )
+
 
 # ---------------------------------------------------------
-# PRINT ENGINE STATUS
-# ---------------------------------------------------------
-
-def print_status(status):
-    """Display engine status in a readable format."""
-
-    print("\n" + "=" * 55)
-    print("           LIVA GEOSENSE AI ENGINE")
-    print("=" * 55)
-
-    print(f"Application       : {status['application']}")
-    print(f"Version           : {status['version']}")
-    print(f"Mode              : {status['mode']}")
-    print(f"Runtime           : {status['runtime']}")
-    print(f"Model Format      : {status['model_format']}")
-    print(f"Target OS         : {status['target_os']}")
-    print(f"CPU Inference     : {status['cpu_inference']}")
-    print(f"GPU Required      : {status['gpu_required']}")
-    print(f"Offline Only      : {status['offline_only']}")
-    print(f"External AI API   : {status['external_ai_api']}")
-
-    print("=" * 55)
-
-
-# ---------------------------------------------------------
-# MAIN ENGINE
+# MAIN
 # ---------------------------------------------------------
 
 def main():
-    """Start the LIVA GeoSense AI engine."""
 
     try:
-        config = load_config()
+
+        config = load_json(
+            CONFIG_FILE
+        )
+
+        model_config = load_json(
+            MODEL_CONFIG_FILE
+        )
+
         system_prompt = load_system_prompt()
 
     except FileNotFoundError as error:
+
         print(f"\nERROR: {error}")
+
         sys.exit(1)
 
-    status = get_engine_status(config)
+    print()
+    print("=" * 60)
+    print("             LIVA GEOSENSE AI")
+    print("=" * 60)
 
-    print_status(status)
+    print()
 
-    print("\nSystem prompt loaded successfully.")
-    print("LIVA GeoSense AI Engine is ready.")
+    print("Mode       : OFFLINE")
+    print("Runtime    : llama.cpp")
+    print("Model      : GGUF")
+    print("Server     : 127.0.0.1:8080")
 
-    print("\nType 'status' to view engine status.")
-    print("Type 'exit' to close the engine.")
+    print()
+
+    if check_server(model_config):
+
+        print("AI Server  : ONLINE")
+        print("Model      : READY")
+
+    else:
+
+        print("AI Server  : OFFLINE")
+        print()
+        print(
+            "Start llama-server before asking "
+            "the AI a question."
+        )
+
+    print()
+
+    print("Type 'exit' to quit.")
+
+    print("=" * 60)
 
     while True:
 
         try:
-            user_input = input("\nLIVA GeoSense > ")
+
+            question = input(
+                "\nLIVA GeoSense > "
+            )
 
         except KeyboardInterrupt:
+
             print("\n\nEngine stopped.")
             break
 
         except EOFError:
+
             print("\n\nEngine stopped.")
             break
 
-        if user_input.lower().strip() == "exit":
-            print("\nLIVA GeoSense shutting down.")
+        if question.lower().strip() == "exit":
+
+            print(
+                "\nLIVA GeoSense shutting down."
+            )
+
             break
 
-        if user_input.lower().strip() == "status":
-            print_status(status)
-            continue
-
-        valid, result = validate_input(user_input)
-
-        if not valid:
-            print(f"\nInput Error: {result}")
-            continue
-
-        # Build the prompt that will eventually be sent
-        # to the local GGUF model.
-        final_prompt = build_prompt(
-            system_prompt,
-            result
+        valid, result = validate_input(
+            question
         )
 
-        # For now, use development mode.
-        response = development_response(result)
+        if not valid:
+
+            print(
+                f"\nInput Error: {result}"
+            )
+
+            continue
+
+        if not check_server(
+            model_config
+        ):
+
+            print(
+                "\nThe local AI server "
+                "is not running."
+            )
+
+            continue
+
+        print(
+            "\nLIVA GeoSense AI is thinking..."
+        )
+
+        response = ask_local_model(
+
+            result,
+
+            system_prompt,
+
+            model_config
+
+        )
 
         print("\n" + response)
 
-        # Keep the generated prompt available for
-        # future llama.cpp integration.
-        _ = final_prompt
-
-
-# ---------------------------------------------------------
-# APPLICATION ENTRY POINT
-# ---------------------------------------------------------
 
 if __name__ == "__main__":
+
     main()
