@@ -1,0 +1,42 @@
+{
+  "application": {
+    "name": "LIVA GeoSense AI",
+    "version": "0.1.0",
+    "mode": "offline",
+    "environment": "development"
+  },
+
+  "model": {
+    "format": "GGUF",
+    "runtime": "llama.cpp",
+    "model_path": "models/model.gguf",
+    "context_size": 4096,
+    "temperature": 0.2,
+    "top_p": 0.9,
+    "max_tokens": 512
+  },
+
+  "hardware": {
+    "target_os": "Ubuntu 22.04 LTS",
+    "architecture": "x86_64",
+    "gpu_required": false,
+    "cpu_inference": true,
+    "memory_limit_gb": 7
+  },
+
+  "features": {
+    "agriculture": true,
+    "geospatial_analysis": true,
+    "vegetation_analysis": true,
+    "environmental_risk": true,
+    "weather_context": true,
+    "multilingual_support": true,
+    "explainable_responses": true
+  },
+
+  "privacy": {
+    "offline_only": true,
+    "external_ai_api": false,
+    "send_user_data_external": false
+  }
+}
