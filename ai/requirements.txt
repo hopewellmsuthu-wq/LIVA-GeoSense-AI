@@ -1,0 +1,13 @@
+# LIVA GeoSense AI
+# Phase 1 dependencies
+
+# No third-party Python packages are required yet.
+# Phase 1 uses Python standard library only.
+
+# Future components may include:
+# llama-cpp-python
+# FastAPI
+# Pydantic
+# NumPy
+# Rasterio
+# GeoPandas
