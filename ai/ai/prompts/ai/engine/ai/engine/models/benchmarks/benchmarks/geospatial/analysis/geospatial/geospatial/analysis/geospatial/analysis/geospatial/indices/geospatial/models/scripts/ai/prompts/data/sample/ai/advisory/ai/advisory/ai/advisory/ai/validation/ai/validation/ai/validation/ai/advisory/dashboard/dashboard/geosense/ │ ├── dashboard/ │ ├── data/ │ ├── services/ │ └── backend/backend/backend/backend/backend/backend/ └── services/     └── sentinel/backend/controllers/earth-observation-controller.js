@@ -1,3 +1,131 @@
+const {
+    processNDVI
+} = require(
+    "../services/sentinel/ndvi-processing"
+);
+
+async function processNDVIRequest(
+    req,
+    res
+) {
+
+    try {
+
+        const {
+
+            boundingBox,
+
+            startDate,
+
+            endDate,
+
+            width = 512,
+
+            height = 512
+
+        } = req.body;
+
+
+        if (!boundingBox) {
+
+            return res.status(400).json({
+
+                success:
+                    false,
+
+                error:
+                    "boundingBox is required."
+
+            });
+
+        }
+
+
+        if (!startDate || !endDate) {
+
+            return res.status(400).json({
+
+                success:
+                    false,
+
+                error:
+                    "startDate and endDate are required."
+
+            });
+
+        }
+
+
+        const result =
+            await processNDVI({
+
+                boundingBox,
+
+                startDate,
+
+                endDate,
+
+                width,
+
+                height
+
+            });
+
+
+        res.setHeader(
+            "Content-Type",
+            result.contentType
+        );
+
+
+        res.setHeader(
+            "X-GeoSense-Product",
+            "Sentinel-2 NDVI"
+        );
+
+
+        return res.send(
+            Buffer.from(
+                result.buffer
+            )
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "NDVI processing error:",
+            error
+        );
+
+
+        return res.status(500).json({
+
+            success:
+                false,
+
+            status:
+                "NDVI_PROCESSING_FAILED",
+
+            error:
+                error.message
+
+        });
+
+    }
+
+}
+
+
+module.exports = {
+
+    searchScenes,
+
+    processNDVIRequest
+
+};
+
 /**
  * =========================================================
  * LIVA GEOSENSE
