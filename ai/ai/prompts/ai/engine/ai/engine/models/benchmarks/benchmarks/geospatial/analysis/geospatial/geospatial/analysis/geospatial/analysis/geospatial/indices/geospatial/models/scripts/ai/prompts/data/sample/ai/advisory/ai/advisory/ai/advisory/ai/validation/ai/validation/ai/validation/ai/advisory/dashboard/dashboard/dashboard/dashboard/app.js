@@ -1281,8 +1281,21 @@ function initialiseGeoSense() {
     initialiseMap();
 
     initialiseKeyboardControls();
+   const satelliteObservation =
+    loadSatelliteObservation();
+
+
+if (satelliteObservation) {
+
+    console.log(
+        "Selected satellite observation:",
+        satelliteObservation
+    );
+
+}
 
     updateMetrics();
+
 
 
     console.log(
@@ -1310,5 +1323,90 @@ if (
 else {
 
     initialiseGeoSense();
+
+}
+
+function loadSatelliteObservation() {
+
+    if (
+        typeof GeoSenseSatelliteAcquisition ===
+        "undefined"
+    ) {
+
+        console.warn(
+            "Satellite acquisition service unavailable."
+        );
+
+        return null;
+
+    }
+
+
+    if (
+        typeof GeoSenseDemoCatalogue ===
+        "undefined"
+    ) {
+
+        console.warn(
+            "Satellite catalogue unavailable."
+        );
+
+        return null;
+
+    }
+
+
+    const eligibleScenes =
+        GeoSenseSatelliteAcquisition
+            .filterByCloudCover(
+                GeoSenseDemoCatalogue,
+                20
+            );
+
+
+    const selectedScene =
+        GeoSenseSatelliteAcquisition
+            .selectBestObservation(
+                eligibleScenes
+            );
+
+
+    if (!selectedScene) {
+
+        console.warn(
+            "No suitable satellite observation found."
+        );
+
+        return null;
+
+    }
+
+
+    const observation =
+        GeoSenseNDVI.createNDVIObservation({
+
+            red:
+                selectedScene.bands.B04,
+
+            nir:
+                selectedScene.bands.B08,
+
+            date:
+                selectedScene.acquisitionDate
+
+        });
+
+
+    return {
+
+        ...selectedScene,
+
+        ndvi:
+            observation.ndvi,
+
+        classification:
+            observation.classification
+
+    };
 
 }
