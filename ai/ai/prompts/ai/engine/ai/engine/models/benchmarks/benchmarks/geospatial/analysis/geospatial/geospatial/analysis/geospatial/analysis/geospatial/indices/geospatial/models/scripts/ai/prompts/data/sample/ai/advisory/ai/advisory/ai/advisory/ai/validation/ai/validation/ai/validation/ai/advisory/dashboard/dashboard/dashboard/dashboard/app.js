@@ -376,6 +376,23 @@ function calculateRisk() {
 
 }
 
+const advisory =
+    generateGeoSenseAdvisory();
+
+
+if (advisory) {
+
+    GeoSenseState.advisory =
+        advisory;
+
+
+    console.log(
+        "GeoSense Advisory:",
+        advisory
+    );
+
+}
+
 
 /* =========================================================
    UPDATE DASHBOARD METRICS
@@ -1609,5 +1626,42 @@ function calculateGeoSenseRisk() {
 
 
     return risk;
+
+           }
+
+function generateGeoSenseAdvisory() {
+
+    if (
+        typeof GeoSenseAdvisoryEngine ===
+        "undefined"
+    ) {
+
+        console.warn(
+            "GeoSense advisory engine unavailable."
+        );
+
+        return null;
+
+    }
+
+
+    const risk =
+        calculateGeoSenseRisk();
+
+
+    if (!risk) {
+
+        return null;
+
+    }
+
+
+    return GeoSenseAdvisoryEngine.generate(
+        risk,
+        {
+            farmId:
+                GeoSenseState.farm.id
+        }
+    );
 
            }
