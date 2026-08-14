@@ -97,3 +97,110 @@ function evaluatePixel(sample) {
 
 module.exports =
     NDVI_EVALSCRIPT;
+
+function updateNDVIDashboard(value) {
+
+    const result =
+        GeoSenseNDVI.classify(
+            value
+        );
+
+
+    const formatted =
+        GeoSenseNDVI.format(
+            value
+        );
+
+
+    const valueElement =
+        document.getElementById(
+            "ndviValue"
+        );
+
+
+    const labelElement =
+        document.getElementById(
+            "ndviLabel"
+        );
+
+
+    const messageElement =
+        document.getElementById(
+            "ndviMessage"
+        );
+
+
+    const statusElement =
+        document.getElementById(
+            "ndviStatus"
+        );
+
+
+    const indicator =
+        document.getElementById(
+            "ndviIndicator"
+        );
+
+
+    if (!valueElement) {
+        return;
+    }
+
+
+    valueElement.textContent =
+        formatted;
+
+
+    labelElement.textContent =
+        result.label;
+
+
+    statusElement.textContent =
+        result.status;
+
+
+    messageElement.textContent =
+
+        result.status === "LOW"
+            ? "Vegetation appears stressed. Investigate the affected area."
+
+        : result.status === "MODERATE"
+            ? "Vegetation is developing but should be monitored."
+
+        : result.status === "GOOD"
+            ? "Vegetation condition is generally healthy."
+
+        : result.status === "EXCELLENT"
+            ? "Strong vegetation signal detected."
+
+        : "No usable satellite data available.";
+
+
+    if (
+        Number.isFinite(value)
+    ) {
+
+        const percentage =
+            (
+                (value + 1) /
+                2
+            ) *
+            100;
+
+
+        indicator.style.left =
+            `${Math.max(
+                0,
+                Math.min(
+                    100,
+                    percentage
+                )
+            )}%`;
+
+    }
+
+}
+
+
+window.updateNDVIDashboard =
+    updateNDVIDashboard;
