@@ -641,16 +641,16 @@ function initialiseMap() {
      * We are keeping the MVP provider-independent.
      */
 
+    const baseMap =
     L.tileLayer(
         "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
         {
             maxZoom: 19,
+
             attribution:
                 '&copy; OpenStreetMap contributors'
         }
     ).addTo(map);
-
-
     /*
      * Centre map on farm.
      */
@@ -1151,7 +1151,34 @@ function initialiseMap() {
         }
     );
 
+    /*
+     * =====================================================
+     * LAYER CONTROL
+     * =====================================================
+     */
 
+    const baseLayers = {
+
+        "Standard Map":
+    baseMap
+
+    const overlayLayers = {
+
+        "Farm Boundary":
+            farmPolygon
+
+    };
+
+
+    L.control
+        .layers(
+            baseLayers,
+            overlayLayers,
+            {
+                collapsed: true
+            }
+        )
+        .addTo(map);
 
 /* =========================================================
    KEYBOARD SHORTCUTS
