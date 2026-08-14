@@ -392,7 +392,9 @@ if (advisory) {
     );
 
 }
+renderCommandCentre();
 
+renderSatelliteObservation();
 
 /* =========================================================
    UPDATE DASHBOARD METRICS
@@ -1753,3 +1755,261 @@ function renderGeoSenseAdvisory() {
        }
 
 renderGeoSenseAdvisory();
+
+function renderCommandCentre() {
+
+    const risk =
+        GeoSenseState.risk;
+
+
+    const currentNDVI =
+        GeoSenseState
+            .observations
+            .currentNDVI;
+
+
+    const health =
+        Math.round(
+            Math.max(
+                0,
+                Math.min(
+                    100,
+                    currentNDVI * 100
+                )
+            )
+        );
+
+
+    const riskScore =
+        risk.score ?? 0;
+
+
+    const farmHealth =
+        getElement(
+            "#farmHealthValue"
+        );
+
+
+    const farmHealthStatus =
+        getElement(
+            "#farmHealthStatus"
+        );
+
+
+    const riskScoreElement =
+        getElement(
+            "#riskScoreValue"
+        );
+
+
+    const riskLevel =
+        getElement(
+            "#riskLevelValue"
+        );
+
+
+    const ndviElement =
+        getElement(
+            "#currentNDVIValue"
+        );
+
+
+    const observationDate =
+        getElement(
+            "#observationDateValue"
+        );
+
+
+    const cloudCover =
+        getElement(
+            "#cloudCoverValue"
+        );
+
+
+    if (farmHealth) {
+
+        farmHealth.textContent =
+            `${health}%`;
+
+    }
+
+
+    if (farmHealthStatus) {
+
+        farmHealthStatus.textContent =
+            currentNDVI >= 0.60
+                ? "Healthy vegetation"
+                : currentNDVI >= 0.40
+                    ? "Moderate vegetation"
+                    : "Vegetation stress";
+
+    }
+
+
+    if (riskScoreElement) {
+
+        riskScoreElement.textContent =
+            `${riskScore}/100`;
+
+    }
+
+
+    if (riskLevel) {
+
+        riskLevel.textContent =
+            risk.level || "UNKNOWN";
+
+    }
+
+
+    if (ndviElement) {
+
+        ndviElement.textContent =
+            Number(
+                currentNDVI
+            ).toFixed(2);
+
+    }
+
+
+    if (observationDate) {
+
+        observationDate.textContent =
+            GeoSenseState
+                .observations
+                .observationDate ||
+            "--";
+
+    }
+
+
+    if (cloudCover) {
+
+        cloudCover.textContent =
+            GeoSenseState
+                .observations
+                .cloudCover !== undefined
+
+                ? `Cloud cover: ${
+                    GeoSenseState
+                        .observations
+                        .cloudCover
+                }%`
+
+                : "Cloud data unavailable";
+
+    }
+
+               }
+
+function renderSatelliteObservation() {
+
+    const container =
+        getElement(
+            "#satelliteObservation"
+        );
+
+
+    if (!container) {
+
+        return;
+
+    }
+
+
+    const observation =
+        loadSatelliteObservation();
+
+
+    if (!observation) {
+
+        container.innerHTML = `
+
+            <div class="observation-row">
+
+                <span class="observation-label">
+                    Status
+                </span>
+
+                <span class="observation-value">
+                    No observation
+                </span>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML = `
+
+        <div class="observation-row">
+
+            <span class="observation-label">
+                Provider
+            </span>
+
+            <span class="observation-value">
+                ${observation.provider}
+            </span>
+
+        </div>
+
+
+        <div class="observation-row">
+
+            <span class="observation-label">
+                Acquisition
+            </span>
+
+            <span class="observation-value">
+                ${observation.acquisitionDate}
+            </span>
+
+        </div>
+
+
+        <div class="observation-row">
+
+            <span class="observation-label">
+                Cloud cover
+            </span>
+
+            <span class="observation-value">
+                ${observation.cloudCoverPercentage}%
+            </span>
+
+        </div>
+
+
+        <div class="observation-row">
+
+            <span class="observation-label">
+                Resolution
+            </span>
+
+            <span class="observation-value">
+                ${observation.resolutionMetres} m
+            </span>
+
+        </div>
+
+
+        <div class="observation-row">
+
+            <span class="observation-label">
+                NDVI
+            </span>
+
+            <span class="observation-value">
+                ${observation.ndvi}
+            </span>
+
+        </div>
+
+    `;
+
+           }
