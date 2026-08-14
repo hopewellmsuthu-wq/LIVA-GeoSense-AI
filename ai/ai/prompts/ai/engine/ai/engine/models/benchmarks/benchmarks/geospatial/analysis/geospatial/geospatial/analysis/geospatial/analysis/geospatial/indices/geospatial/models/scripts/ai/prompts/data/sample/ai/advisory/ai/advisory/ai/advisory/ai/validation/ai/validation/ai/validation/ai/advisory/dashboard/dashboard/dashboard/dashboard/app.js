@@ -1295,7 +1295,19 @@ if (satelliteObservation) {
 }
 
     updateMetrics();
+   
+const vegetationAnalysis =
+    analyseNDVIHistory();
 
+
+if (vegetationAnalysis) {
+
+    console.log(
+        "GeoSense vegetation analysis:",
+        vegetationAnalysis
+    );
+
+       }
 
 
     console.log(
