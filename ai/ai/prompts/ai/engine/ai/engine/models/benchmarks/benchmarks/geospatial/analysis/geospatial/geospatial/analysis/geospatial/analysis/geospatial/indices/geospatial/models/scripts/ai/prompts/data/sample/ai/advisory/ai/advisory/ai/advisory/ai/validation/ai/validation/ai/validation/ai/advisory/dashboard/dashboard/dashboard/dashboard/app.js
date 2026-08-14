@@ -1316,6 +1316,8 @@ if (vegetationAnalysis) {
 
 }
 
+initialiseNDVIChart();
+
 
 /* =========================================================
    START APPLICATION
@@ -1420,5 +1422,139 @@ function loadSatelliteObservation() {
             observation.classification
 
     };
+
+}
+
+function initialiseNDVIChart() {
+
+    const canvas =
+        getElement("#ndviChart");
+
+
+    if (!canvas) {
+
+        return;
+
+    }
+
+
+    if (
+        typeof Chart ===
+        "undefined"
+    ) {
+
+        console.warn(
+            "Chart.js unavailable."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        typeof GeoSenseNDVIHistory ===
+        "undefined"
+    ) {
+
+        return;
+
+    }
+
+
+    const labels =
+        GeoSenseNDVIHistory.map(
+            observation =>
+                observation.date
+        );
+
+
+    const values =
+        GeoSenseNDVIHistory.map(
+            observation =>
+                observation.ndvi
+        );
+
+
+    new Chart(
+        canvas,
+        {
+
+            type:
+                "line",
+
+            data: {
+
+                labels,
+
+                datasets: [
+
+                    {
+
+                        label:
+                            "NDVI",
+
+                        data:
+                            values,
+
+                        tension:
+                            0.35,
+
+                        fill:
+                            true,
+
+                        pointRadius:
+                            5
+
+                    }
+
+                ]
+
+            },
+
+            options: {
+
+                responsive:
+                    true,
+
+                maintainAspectRatio:
+                    false,
+
+                plugins: {
+
+                    legend: {
+
+                        display:
+                            false
+
+                    }
+
+                },
+
+                scales: {
+
+                    y: {
+
+                        min:
+                            0,
+
+                        max:
+                            1,
+
+                        ticks: {
+
+                            stepSize:
+                                0.2
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+    );
 
 }
