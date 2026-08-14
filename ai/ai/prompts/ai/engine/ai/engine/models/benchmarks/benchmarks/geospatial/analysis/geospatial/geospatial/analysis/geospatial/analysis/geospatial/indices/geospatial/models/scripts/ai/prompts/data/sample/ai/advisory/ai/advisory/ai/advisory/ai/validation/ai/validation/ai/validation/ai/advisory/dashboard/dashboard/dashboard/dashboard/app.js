@@ -826,6 +826,331 @@ function initialiseMap() {
     );
 
        }
+    /*
+     * =====================================================
+     * NDVI ZONES
+     * =====================================================
+     *
+     * Demonstration remote-sensing zones.
+     *
+     * Later these polygons can be generated from
+     * actual satellite NDVI raster/vector processing.
+     */
+
+    const ndviZones = [
+
+        {
+            name: "Healthy vegetation",
+
+            ndvi: 0.72,
+
+            status: "HEALTHY",
+
+            color: "#34d399",
+
+            coordinates: [
+
+                [
+                    -31.5820,
+                    28.7822
+                ],
+
+                [
+                    -31.5815,
+                    28.7840
+                ],
+
+                [
+                    -31.5830,
+                    28.7848
+                ],
+
+                [
+                    -31.5838,
+                    28.7832
+                ]
+
+            ]
+        },
+
+
+        {
+            name: "Moderate vegetation",
+
+            ndvi: 0.51,
+
+            status: "MODERATE",
+
+            color: "#fbbf24",
+
+            coordinates: [
+
+                [
+                    -31.5830,
+                    28.7848
+                ],
+
+                [
+                    -31.5840,
+                    28.7853
+                ],
+
+                [
+                    -31.5847,
+                    28.7835
+                ],
+
+                [
+                    -31.5838,
+                    28.7832
+                ]
+
+            ]
+        },
+
+
+        {
+            name: "Vegetation stress",
+
+            ndvi: 0.31,
+
+            status: "STRESSED",
+
+            color: "#fb7185",
+
+            coordinates: [
+
+                [
+                    -31.5840,
+                    28.7853
+                ],
+
+                [
+                    -31.5850,
+                    28.7832
+                ],
+
+                [
+                    -31.5842,
+                    28.7818
+                ],
+
+                [
+                    -31.5838,
+                    28.7832
+                ]
+
+            ]
+        }
+
+    ];
+
+
+    /*
+     * Store generated layers.
+     */
+
+    window.GeoSenseNDVILayers = [];
+
+
+    /*
+     * Draw each NDVI zone.
+     */
+
+    ndviZones.forEach(
+        zone => {
+
+            const polygon =
+                L.polygon(
+                    zone.coordinates,
+                    {
+                        color:
+                            zone.color,
+
+                        weight:
+                            2,
+
+                        fillColor:
+                            zone.color,
+
+                        fillOpacity:
+                            0.35
+                    }
+                ).addTo(map);
+               /*
+     * =====================================================
+     * NDVI LEGEND
+     * =====================================================
+     */
+
+    const legend =
+        L.control({
+            position: "bottomright"
+        });
+
+
+    legend.onAdd =
+        function () {
+
+            const div =
+                L.DomUtil.create(
+                    "div",
+                    "geosense-legend"
+                );
+
+
+            div.innerHTML = `
+
+                <div class="legend-title">
+                    NDVI STATUS
+                </div>
+
+                <div class="legend-item">
+                    <span
+                        class="legend-dot healthy"
+                    ></span>
+
+                    Healthy
+                </div>
+
+                <div class="legend-item">
+                    <span
+                        class="legend-dot moderate"
+                    ></span>
+
+                    Moderate
+                </div>
+
+                <div class="legend-item">
+                    <span
+                        class="legend-dot stressed"
+                    ></span>
+
+                    Stressed
+                </div>
+
+            `;
+
+
+            return div;
+
+        };
+
+
+    legend.addTo(map);
+
+
+            /*
+             * Popup information.
+             */
+
+            polygon.bindPopup(`
+
+                <div
+                    style="
+                        min-width:190px;
+                        font-family:Arial,sans-serif;
+                    "
+                >
+
+                    <strong>
+                        ${zone.name}
+                    </strong>
+
+                    <br><br>
+
+                    NDVI:
+                    <strong>
+                        ${zone.ndvi}
+                    </strong>
+
+                    <br>
+
+                    Status:
+                    <strong
+                        style="
+                            color:${zone.color};
+                        "
+                    >
+                        ${zone.status}
+                    </strong>
+
+                    <br><br>
+
+                    <small>
+                        This is an MVP
+                        demonstration layer.
+                    </small>
+
+                </div>
+
+            `);
+
+
+            /*
+             * Hover effect.
+             */
+
+            polygon.on(
+                "mouseover",
+                function () {
+
+                    this.setStyle({
+
+                        fillOpacity:
+                            0.55,
+
+                        weight:
+                            3
+
+                    });
+
+                }
+            );
+
+
+            polygon.on(
+                "mouseout",
+                function () {
+
+                    this.setStyle({
+
+                        fillOpacity:
+                            0.35,
+
+                        weight:
+                            2
+
+                    });
+
+                }
+            );
+
+
+            /*
+             * Click event.
+             */
+
+            polygon.on(
+                "click",
+                function () {
+
+                    console.log(
+                        "NDVI zone selected:",
+                        zone
+                    );
+
+                }
+            );
+
+
+            window
+                .GeoSenseNDVILayers
+                .push(polygon);
+
+        }
+    );
+
 
 
 /* =========================================================
