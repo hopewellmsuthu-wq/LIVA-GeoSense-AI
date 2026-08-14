@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="LIVA GeoSense — Geospatial Agricultural Intelligence"
+    >
+
+    <title>
+        LIVA GeoSense
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+<body>
+
+    <div class="app-shell">
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar">
+
+            <div class="brand">
+
+                <div class="brand-mark">
+                    LG
+                </div>
+
+                <div>
+
+                    <h1>
+                        LIVA
+                    </h1>
+
+                    <span>
+                        GeoSense
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <nav>
+
+                <button
+                    class="nav-item active"
+                    data-section="overview"
+                >
+                    <span>⌂</span>
+                    Overview
+                </button>
+
+                <button
+                    class="nav-item"
+                    data-section="vegetation"
+                >
+                    <span>◈</span>
+                    Vegetation
+                </button>
+
+                <button
+                    class="nav-item"
+                    data-section="risk"
+                >
+                    <span>⚠</span>
+                    Risk Analysis
+                </button>
+
+                <button
+                    class="nav-item"
+                    data-section="advisory"
+                >
+                    <span>✦</span>
+                    AI Advisory
+                </button>
+
+            </nav>
+
+
+            <div class="sidebar-footer">
+
+                <div class="offline-status">
+
+                    <span class="status-dot"></span>
+
+                    <div>
+
+                        <strong>
+                            Local Intelligence
+                        </strong>
+
+                        <small>
+                            Offline-ready
+                        </small>
+
+                    </div>
+
+                </div>
+
+                <small>
+                    LIVA GeoSense MVP v0.1
+                </small>
+
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN -->
+
+        <main class="main-content">
+
+            <header class="topbar">
+
+                <div>
+
+                    <p class="eyebrow">
+                        AGRICULTURAL INTELLIGENCE
+                    </p>
+
+                    <h2>
+                        Farm Overview
+                    </h2>
+
+                </div>
+
+
+                <div class="topbar-actions">
+
+                    <span class="data-badge">
+                        DEMO DATA
+                    </span>
+
+                    <button
+                        id="refreshBtn"
+                        class="refresh-btn"
+                    >
+                        ↻ Refresh
+                    </button>
+
+                </div>
+
+            </header>
+
+
+            <!-- OVERVIEW -->
+
+            <section
+                id="overview"
+                class="dashboard-section active-section"
+            >
+
+                <div class="farm-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            SELECTED FARM
+                        </span>
+
+                        <h3>
+                            LIVA GeoSense Demonstration Farm
+                        </h3>
+
+                        <p>
+                            Maize · 12.5 hectares ·
+                            South Africa
+                        </p>
+
+                    </div>
+
+                    <div class="farm-id">
+                        LGS-DEMO-001
+                    </div>
+
+                </div>
+
+
+                <!-- METRICS -->
+
+                <div class="metrics-grid">
+
+                    <article class="metric-card">
+
+                        <div class="metric-top">
+
+                            <span>
+                                Current NDVI
+                            </span>
+
+                            <span class="metric-icon">
+                                ◉
+                            </span>
+
+                        </div>
+
+                        <strong id="ndviValue">
+                            0.49
+                        </strong>
+
+                        <small>
+                            Vegetation index
+                        </small>
+
+                    </article>
+
+
+                    <article class="metric-card">
+
+                        <div class="metric-top">
+
+                            <span>
+                                Vegetation Trend
+                            </span>
+
+                            <span class="metric-icon">
+                                ↘
+                            </span>
+
+                        </div>
+
+                        <strong class="danger-text">
+                            Declining
+                        </strong>
+
+                        <small>
+                            NDVI change: -0.19
+                        </small>
+
+                    </article>
+
+
+                    <article class="metric-card">
+
+                        <div class="metric-top">
+
+                            <span>
+                                Risk Level
+                            </span>
+
+                            <span class="metric-icon">
+                                ⚠
+                            </span>
+
+                        </div>
+
+                        <strong class="warning-text">
+                            Moderate
+                        </strong>
+
+                        <small>
+                            Screening signal
+                        </small>
+
+                    </article>
+
+
+                    <article class="metric-card">
+
+                        <div class="metric-top">
+
+                            <span>
+                                Confidence
+                            </span>
+
+                            <span class="metric-icon">
+                                ✓
+                            </span>
+
+                        </div>
+
+                        <strong>
+                            Moderate
+                        </strong>
+
+                        <small>
+                            Evidence-based
+                        </small>
+
+                    </article>
+
+                </div>
+
+
+                <!-- MAP + SUMMARY -->
+
+                <div class="content-grid">
+
+                    <article class="panel map-panel">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <span class="section-label">
+                                    GEOSPATIAL VIEW
+                                </span>
+
+                                <h3>
+                                    Farm Monitoring Area
+                                </h3>
+
+                            </div>
+
+                            <span class="map-tag">
+                                GeoJSON
+                            </span>
+
+                        </div>
+
+
+                        <div
+                            id="farmMap"
+                            class="farm-map"
+                        >
+
+                            <div class="map-grid"></div>
+
+                            <div class="farm-polygon">
+
+                                <span>
+                                    LIVA FARM
+                                </span>
+
+                            </div>
+
+                            <div class="map-marker">
+                                🛰
+                            </div>
+
+                            <div class="map-coordinates">
+
+                                -31.5833,
+                                28.7833
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="panel status-panel">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <span class="section-label">
+                                    INTELLIGENCE
+                                </span>
+
+                                <h3>
+                                    Current Assessment
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="assessment">
+
+                            <div class="assessment-icon">
+                                !
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Possible vegetation stress
+                                </strong>
+
+                                <p>
+                                    NDVI has declined from
+                                    <b>0.68</b> to
+                                    <b>0.49</b>.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="indicator-list">
+
+                            <div>
+                                <span></span>
+                                Moderate NDVI decline
+                            </div>
+
+                            <div>
+                                <span></span>
+                                Rainfall data available
+                            </div>
+
+                            <div>
+                                <span></span>
+                                Soil moisture data available
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            class="primary-btn"
+                            data-section-target="advisory"
+                        >
+                            View AI Advisory →
+                        </button>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+
+            <!-- VEGETATION -->
+
+            <section
+                id="vegetation"
+                class="dashboard-section"
+            >
+
+                <div class="page-heading">
+
+                    <span class="section-label">
+                        REMOTE SENSING
+                    </span>
+
+                    <h3>
+                        Vegetation Intelligence
+                    </h3>
+
+                    <p>
+                        Monitor vegetation condition and
+                        change using geospatial indicators.
+                    </p>
+
+                </div>
+
+
+                <div class="large-stat">
+
+                    <div>
+
+                        <span>
+                            CURRENT NDVI
+                        </span>
+
+                        <strong>
+                            0.49
+                        </strong>
+
+                    </div>
+
+                    <div class="trend-negative">
+                        ↓ 0.19
+                    </div>
+
+                </div>
+
+
+                <div class="chart-card">
+
+                    <div class="chart-header">
+
+                        <h3>
+                            NDVI Change
+                        </h3>
+
+                        <span>
+                            Demonstration data
+                        </span>
+
+                    </div>
+
+                    <div class="ndvi-chart">
+
+                        <div class="chart-line"></div>
+
+                        <div class="chart-point point-one">
+                            0.68
+                        </div>
+
+                        <div class="chart-point point-two">
+                            0.49
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- RISK -->
+
+            <section
+                id="risk"
+                class="dashboard-section"
+            >
+
+                <div class="page-heading">
+
+                    <span class="section-label">
+                        DECISION SUPPORT
+                    </span>
+
+                    <h3>
+                        Risk Analysis
+                    </h3>
+
+                    <p>
+                        Explainable screening based on
+                        available geospatial evidence.
+                    </p>
+
+                </div>
+
+
+                <div class="risk-card">
+
+                    <div class="risk-score">
+                        <span>
+                            RISK SCORE
+                        </span>
+
+                        <strong>
+                            7
+                        </strong>
+
+                        <small>
+                            / 8+
+                        </small>
+                    </div>
+
+
+                    <div>
+
+                        <span class="risk-level">
+                            MODERATE
+                        </span>
+
+                        <h3>
+                            Vegetation stress indicators detected
+                        </h3>
+
+                        <p>
+                            Multiple indicators suggest
+                            that the farm should be investigated
+                            further.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="evidence-grid">
+
+                    <div class="evidence-item">
+                        <span>
+                            Current NDVI
+                        </span>
+                        <strong>
+                            0.49
+                        </strong>
+                        <small>
+                            Observed
+                        </small>
+                    </div>
+
+                    <div class="evidence-item">
+                        <span>
+                            Previous NDVI
+                        </span>
+                        <strong>
+                            0.68
+                        </strong>
+                        <small>
+                            Observed
+                        </small>
+                    </div>
+
+                    <div class="evidence-item">
+                        <span>
+                            Rainfall
+                        </span>
+                        <strong>
+                            42 mm
+                        </strong>
+                        <small>
+                            Observed
+                        </small>
+                    </div>
+
+                    <div class="evidence-item">
+                        <span>
+                            Soil Moisture
+                        </span>
+                        <strong>
+                            31.5
+                        </strong>
+                        <small>
+                            Observed
+                        </small>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- AI ADVISORY -->
+
+            <section
+                id="advisory"
+                class="dashboard-section"
+            >
+
+                <div class="page-heading">
+
+                    <span class="section-label">
+                        LOCAL AI
+                    </span>
+
+                    <h3>
+                        GeoSense AI Advisory
+                    </h3>
+
+                    <p>
+                        Evidence-grounded agricultural
+                        decision support.
+                    </p>
+
+                </div>
+
+
+                <div class="advisory-layout">
+
+                    <article class="panel advisory-card">
+
+                        <div class="ai-header">
+
+                            <div class="ai-avatar">
+                                ✦
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    LIVA GeoSense AI
+                                </strong>
+
+                                <span>
+                                    Evidence-grounded advisory
+                                </span>
+
+                            </div>
+
+                            <span class="local-badge">
+                                LOCAL
+                            </span>
+
+                        </div>
+
+
+                        <div class="ai-message">
+
+                            <h4>
+                                Situation
+                            </h4>
+
+                            <p>
+                                The available GeoSense data shows
+                                that vegetation activity has declined
+                                from an NDVI value of
+                                <strong>0.68</strong> to
+                                <strong>0.49</strong>.
+                            </p>
+
+
+                            <h4>
+                                What the data may indicate
+                            </h4>
+
+                            <p>
+                                The decline may indicate vegetation
+                                stress. However, the available
+                                information cannot determine the
+                                exact cause.
+                            </p>
+
+
+                            <h4>
+                                What we cannot determine
+                            </h4>
+
+                            <p>
+                                The current evidence cannot confirm
+                                whether the cause is disease, pests,
+                                nutrient deficiency, water stress,
+                                or another factor.
+                            </p>
+
+
+                            <h4>
+                                Recommended next steps
+                            </h4>
+
+                            <p>
+                                Inspect the field and compare areas
+                                showing weaker vegetation with
+                                healthier areas. Additional field
+                                verification may help identify the
+                                cause.
+                            </p>
+
+
+                            <div class="confidence-box">
+
+                                <span>
+                                    CONFIDENCE
+                                </span>
+
+                                <strong>
+                                    MODERATE
+                                </strong>
+
+                                <small>
+                                    Based on available geospatial
+                                    evidence.
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="panel evidence-panel">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <span class="section-label">
+                                    EVIDENCE TRAIL
+                                </span>
+
+                                <h3>
+                                    Why this assessment?
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="evidence-row">
+
+                            <span>
+                                Current NDVI
+                            </span>
+
+                            <strong>
+                                0.49
+                            </strong>
+
+                        </div>
+
+                        <div class="evidence-row">
+
+                            <span>
+                                Previous NDVI
+                            </span>
+
+                            <strong>
+                                0.68
+       
