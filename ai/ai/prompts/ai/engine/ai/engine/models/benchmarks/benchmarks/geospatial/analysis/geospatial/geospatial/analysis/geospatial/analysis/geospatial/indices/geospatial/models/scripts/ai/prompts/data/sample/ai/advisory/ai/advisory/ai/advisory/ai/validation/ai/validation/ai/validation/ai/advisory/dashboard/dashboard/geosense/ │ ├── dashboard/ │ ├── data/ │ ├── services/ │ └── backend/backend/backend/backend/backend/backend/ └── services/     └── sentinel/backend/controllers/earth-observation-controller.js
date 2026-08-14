@@ -70,6 +70,10 @@ async function processNDVIRequest(
                 height
 
             });
+        const statistics =
+    await calculateNDVIStatistics(
+        result.buffer
+    );
 
 
         res.setHeader(
@@ -116,6 +120,7 @@ async function processNDVIRequest(
     }
 
 }
+
 
 
 module.exports = {
@@ -267,4 +272,27 @@ const {
     calculateNDVIStatistics
 } = require(
     "../services/sentinel/ndvi-statistics"
+);
+
+res.setHeader(
+    "Content-Type",
+    result.contentType
+);
+
+res.setHeader(
+    "X-GeoSense-Product",
+    "Sentinel-2 NDVI"
+);
+
+res.setHeader(
+    "X-GeoSense-Mean-NDVI",
+    String(
+        statistics.mean ?? ""
+    )
+);
+
+return res.send(
+    Buffer.from(
+        result.buffer
+    )
 );
