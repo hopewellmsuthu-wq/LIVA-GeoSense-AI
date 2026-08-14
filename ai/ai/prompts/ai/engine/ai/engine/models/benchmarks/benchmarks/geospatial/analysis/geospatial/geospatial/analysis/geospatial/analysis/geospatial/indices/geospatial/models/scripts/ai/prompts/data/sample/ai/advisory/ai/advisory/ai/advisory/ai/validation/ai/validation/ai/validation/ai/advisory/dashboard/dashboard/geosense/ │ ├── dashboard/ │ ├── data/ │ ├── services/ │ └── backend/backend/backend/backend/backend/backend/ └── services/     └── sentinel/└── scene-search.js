@@ -1,29 +1,24 @@
 /**
  * =========================================================
  * LIVA GEOSENSE
- * SENTINEL-2 SCENE SEARCH SERVICE
+ * REAL SENTINEL-2 STAC SCENE SEARCH
  * =========================================================
- *
- * Provider-independent scene search layer.
- *
- * The actual provider request will be connected through
- * the backend. Never expose provider credentials to the
- * browser.
  */
 
 "use strict";
 
 
+const STAC_URL =
+    "https://stac.dataspace.copernicus.eu/v1/search";
+
+
 function validateBoundingBox(boundingBox) {
 
     if (!boundingBox) {
-
         throw new Error(
             "Bounding box is required."
         );
-
     }
-
 
     const required = [
         "south",
@@ -32,12 +27,10 @@ function validateBoundingBox(boundingBox) {
         "east"
     ];
 
-
     for (const field of required) {
 
         if (
-            typeof boundingBox[field] !==
-            "number"
+            typeof boundingBox[field] !== "number"
         ) {
 
             throw new Error(
@@ -47,7 +40,6 @@ function validateBoundingBox(boundingBox) {
         }
 
     }
-
 
     if (
         boundingBox.south >=
@@ -59,7 +51,6 @@ function validateBoundingBox(boundingBox) {
         );
 
     }
-
 
     if (
         boundingBox.west >=
@@ -88,13 +79,11 @@ function validateDateRange(
 
     }
 
-
     const start =
         new Date(startDate);
 
     const end =
         new Date(endDate);
-
 
     if (
         Number.isNaN(start.getTime()) ||
@@ -107,7 +96,6 @@ function validateDateRange(
 
     }
 
-
     if (start > end) {
 
         throw new Error(
@@ -119,7 +107,40 @@ function validateDateRange(
 }
 
 
-function buildSceneSearchRequest({
+function createPolygon(boundingBox) {
+
+    const {
+        south,
+        west,
+        north,
+        east
+    } = boundingBox;
+
+
+    return {
+
+        type: "Polygon",
+
+        coordinates: [[
+
+            [west, south],
+
+            [east, south],
+
+            [east, north],
+
+            [west, north],
+
+            [west, south]
+
+        ]]
+
+    };
+
+}
+
+
+async function searchSentinelScenes({
 
     boundingBox,
 
@@ -127,7 +148,9 @@ function buildSceneSearchRequest({
 
     endDate,
 
-    maximumCloudPercentage = 20
+    maximumCloudPercentage = 20,
+
+    limit = 10
 
 }) {
 
@@ -142,62 +165,150 @@ function buildSceneSearchRequest({
     );
 
 
-    return {
+    const geometry =
+        createPolygon(
+            boundingBox
+        );
 
-        collection:
-            "sentinel-2",
 
-        boundingBox,
+    const start =
+        `${startDate}T00:00:00Z`;
 
-        startDate,
 
-        endDate,
+    const end =
+        `${endDate}T23:59:59Z`;
 
-        cloudCover: {
 
-            maximum:
-                maximumCloudPercentage
+    const payload = {
+
+        collections: [
+            "sentinel-2-l2a"
+        ],
+
+        datetime:
+            `${start}/${end}`,
+
+        intersects:
+            geometry,
+
+        query: {
+
+            "eo:cloud_cover": {
+
+                lte:
+                    maximumCloudPercentage
+
+            }
 
         },
 
-        requiredBands: [
+        sortby: [
 
-            "B04",
-            "B08"
+            {
 
-        ]
+                field:
+                    "properties.eo:cloud_cover",
+
+                direction:
+                    "asc"
+
+            }
+
+        ],
+
+        limit
 
     };
+
+
+    const response =
+        await fetch(
+            STAC_URL,
+            {
+
+                method:
+                    "POST",
+
+                headers: {
+
+                    "Content-Type":
+                        "application/json"
+
+                },
+
+                body:
+                    JSON.stringify(
+                        payload
+                    )
+
+            }
+        );
+
+
+    if (!response.ok) {
+
+        const message =
+            await response.text();
+
+
+        throw new Error(
+            `Sentinel STAC request failed (${response.status}): ${message}`
+        );
+
+    }
+
+
+    const data =
+        await response.json();
+
+
+    return data.features || [];
 
 }
 
 
 function normaliseScene(scene) {
 
+    const properties =
+        scene.properties || {};
+
+
     return {
 
         id:
-            scene.id ?? null,
+            scene.id || null,
+
+        collection:
+            "sentinel-2-l2a",
+
+        provider:
+            "Copernicus Data Space",
+
+        platform:
+            properties.platform ||
+            "Sentinel-2",
 
         acquisitionDate:
-            scene.acquisitionDate ?? null,
+            properties.datetime ||
+            properties["dct:created"] ||
+            null,
 
         cloudCoverPercentage:
             Number(
-                scene.cloudCoverPercentage ?? 0
+                properties["eo:cloud_cover"] ??
+                0
             ),
 
-        platform:
-            scene.platform ??
-            "Sentinel-2",
-
-        processingLevel:
-            scene.processingLevel ??
+        geometry:
+            scene.geometry ||
             null,
 
-        geometry:
-            scene.geometry ??
-            null
+        assets:
+            scene.assets ||
+            {},
+
+        source:
+            "REAL_STAC_CATALOGUE"
 
     };
 
@@ -206,7 +317,7 @@ function normaliseScene(scene) {
 
 module.exports = {
 
-    buildSceneSearchRequest,
+    searchSentinelScenes,
 
     normaliseScene
 
