@@ -2096,3 +2096,184 @@ async function runNDVIAnalysis() {
     return true;
 
                    }
+function createStressPopup(zone) {
+
+    const ndvi =
+        Number(zone.ndvi);
+
+
+    const severity =
+        zone.severity >= 4
+            ? "SEVERE"
+            : zone.severity >= 3
+                ? "HIGH"
+                : "MODERATE";
+
+
+    return `
+        <div class="stress-popup">
+
+            <div class="stress-popup-header">
+
+                <span>
+                    VEGETATION ALERT
+                </span>
+
+                <strong>
+                    ${severity}
+                </strong>
+
+            </div>
+
+
+            <h3>
+                Stress Zone Detected
+            </h3>
+
+
+            <div class="stress-metric">
+
+                <span>
+                    NDVI
+                </span>
+
+                <strong>
+                    ${ndvi.toFixed(2)}
+                </strong>
+
+            </div>
+
+
+            <p>
+                GeoSense detected a
+                weaker vegetation signal
+                in this area.
+            </p>
+
+
+            <button
+                onclick="createGeoSenseTask(
+                    ${JSON.stringify(zone)}
+                )"
+                class="create-task-button">
+
+                Create Field Task
+
+            </button>
+
+        </div>
+    `;
+           }
+
+async function createGeoSenseTask(zone) {
+
+    const farmId =
+        window.currentFarmId ||
+        "LGS-DEMO-001";
+
+
+    const severity =
+        zone.severity >= 4
+            ? "SEVERE"
+            : zone.severity >= 3
+                ? "HIGH"
+                : "MODERATE";
+
+
+    const recommendation =
+        severity === "SEVERE"
+
+            ? "Urgently inspect soil moisture, irrigation, pests and disease."
+
+            : severity === "HIGH"
+
+                ? "Inspect irrigation coverage and check for crop stress."
+
+                : "Monitor the area and compare with the next observation.";
+
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/field-tasks",
+                {
+
+                    method:
+                        "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            farmId,
+
+                            zone: {
+
+                                row:
+                                    zone.row,
+
+                                column:
+                                    zone.column
+
+                            },
+
+                            ndvi:
+                                zone.ndvi,
+
+                            severity,
+
+                            recommendation
+
+                        })
+
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if (!result.success) {
+
+            throw new Error(
+                result.error ||
+                "Unable to create field task."
+            );
+
+        }
+
+
+        alert(
+            `Field task ${result.task.id} created successfully.`
+        );
+
+
+        console.log(
+            "GeoSense task created:",
+            result.task
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            error
+        );
+
+        alert(
+            "Could not create field task."
+        );
+
+    }
+
+       }
+
