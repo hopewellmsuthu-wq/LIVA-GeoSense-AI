@@ -393,3 +393,21 @@ app.listen(
 
     }
 );
+
+const {
+    createTask,
+    getTasks
+} = require(
+    "./controllers/field-task-controller"
+);
+
+    app.post(
+    "/api/field-tasks",
+    createTask
+);
+
+
+app.get(
+    "/api/field-tasks",
+    getTasks
+);
