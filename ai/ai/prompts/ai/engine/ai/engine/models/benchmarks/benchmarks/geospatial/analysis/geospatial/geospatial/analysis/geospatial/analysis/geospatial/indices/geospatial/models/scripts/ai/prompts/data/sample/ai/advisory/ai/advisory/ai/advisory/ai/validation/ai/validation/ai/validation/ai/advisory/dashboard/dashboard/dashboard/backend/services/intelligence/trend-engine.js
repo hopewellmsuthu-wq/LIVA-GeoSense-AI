@@ -198,3 +198,120 @@ module.exports = {
     analyseTrend
 
 };
+
+function calculateTrend(
+    history
+) {
+
+    if (
+        !Array.isArray(history) ||
+        history.length < 2
+    ) {
+
+        return null;
+
+    }
+
+
+    const sorted =
+        [...history].sort(
+            (a, b) =>
+                new Date(a.date) -
+                new Date(b.date)
+        );
+
+
+    const previous =
+        Number(
+            sorted[
+                sorted.length - 2
+            ].ndvi
+        );
+
+
+    const current =
+        Number(
+            sorted[
+                sorted.length - 1
+            ].ndvi
+        );
+
+
+    const difference =
+        current - previous;
+
+
+    let direction =
+        "STABLE";
+
+
+    if (
+        difference <= -0.05
+    ) {
+
+        direction =
+            "DECLINING";
+
+    }
+
+    else if (
+        difference >= 0.05
+    ) {
+
+        direction =
+            "IMPROVING";
+
+    }
+
+
+    return {
+
+        direction,
+
+        currentNDVI:
+            current,
+
+        previousNDVI:
+            previous,
+
+        change:
+            difference,
+
+        status:
+            difference <= -0.15
+                ? "HIGH"
+
+                : difference <= -0.05
+                    ? "MODERATE"
+
+                    : difference >= 0.05
+                        ? "POSITIVE"
+
+                        : "LOW",
+
+        message:
+
+            difference <= -0.15
+
+                ? "Rapid vegetation decline detected."
+
+                : difference <= -0.05
+
+                    ? "Vegetation is declining and should be investigated."
+
+                    : difference >= 0.05
+
+                        ? "Vegetation is improving."
+
+                        : "Vegetation is relatively stable."
+
+    };
+
+}
+
+
+window.GeoSenseTrendEngine = {
+
+    calculateTrend
+
+};
