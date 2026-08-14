@@ -81,11 +81,23 @@ async function processNDVIRequest(
             result.contentType
         );
 
-
         res.setHeader(
-            "X-GeoSense-Product",
-            "Sentinel-2 NDVI"
-        );
+    "X-GeoSense-Product",
+    "Sentinel-2 NDVI"
+);
+
+res.setHeader(
+    "X-GeoSense-Start-Date",
+    startDate
+);
+
+res.setHeader(
+    "X-GeoSense-End-Date",
+    endDate
+);
+
+
+    
 
 
         return res.send(
