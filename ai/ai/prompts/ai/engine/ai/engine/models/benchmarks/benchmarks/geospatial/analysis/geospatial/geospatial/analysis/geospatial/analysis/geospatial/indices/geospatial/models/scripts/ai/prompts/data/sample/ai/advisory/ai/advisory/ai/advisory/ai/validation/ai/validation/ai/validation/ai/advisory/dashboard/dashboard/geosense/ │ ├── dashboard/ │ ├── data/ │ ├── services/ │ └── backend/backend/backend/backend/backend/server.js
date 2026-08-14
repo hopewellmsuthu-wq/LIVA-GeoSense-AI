@@ -1,3 +1,12 @@
+const {
+
+    searchScenes,
+
+    processNDVIRequest
+
+} = require(
+    "./controllers/earth-observation-controller"
+);
 /**
  * =========================================================
  * LIVA GEOSENSE
@@ -128,8 +137,8 @@ app.get(
  */
 
 app.post(
-    "/api/earth-observation/scenes",
-    searchScenes
+    "/api/earth-observation/ndvi",
+    processNDVIRequest
 );
 
         const {
