@@ -262,3 +262,9 @@ module.exports = {
     searchScenes
 
 };
+
+const {
+    calculateNDVIStatistics
+} = require(
+    "../services/sentinel/ndvi-statistics"
+);
