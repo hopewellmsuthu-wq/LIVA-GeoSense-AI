@@ -564,34 +564,268 @@ function updateTimestamp() {
 
 function initialiseMap() {
 
-    const map =
+    const mapElement =
         getElement("#farmMap");
 
 
-    if (!map) {
+    if (!mapElement) {
+
+        console.warn(
+            "GeoSense map container not found."
+        );
 
         return;
 
     }
 
 
-    map.addEventListener(
+    /*
+     * Make sure Leaflet loaded correctly.
+     */
+
+    if (
+        typeof L === "undefined"
+    ) {
+
+        console.error(
+            "Leaflet could not be loaded."
+        );
+
+        mapElement.innerHTML = `
+            <div style="
+                height:100%;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                color:#8fa2b8;
+                font-size:13px;
+            ">
+                Map library unavailable
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    /*
+     * Demonstration coordinates.
+     *
+     * Later these will come directly from
+     * the GeoSense farm dataset.
+     */
+
+    const farmCoordinates = [
+        -31.5833,
+        28.7833
+    ];
+
+
+    /*
+     * Create map.
+     */
+
+    const map = L.map(
+        "farmMap",
+        {
+            zoomControl: true,
+            attributionControl: true
+        }
+    );
+
+
+    /*
+     * Satellite-style base layer.
+     *
+     * We are keeping the MVP provider-independent.
+     */
+
+    L.tileLayer(
+        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        {
+            maxZoom: 19,
+            attribution:
+                '&copy; OpenStreetMap contributors'
+        }
+    ).addTo(map);
+
+
+    /*
+     * Centre map on farm.
+     */
+
+    map.setView(
+        farmCoordinates,
+        15
+    );
+
+
+    /*
+     * Farm boundary.
+     *
+     * This is demonstration geometry.
+     * Later it will come from actual GeoJSON.
+     */
+
+    const farmBoundary = [
+
+        [
+            -31.5819,
+            28.7819
+        ],
+
+        [
+            -31.5812,
+            28.7845
+        ],
+
+        [
+            -31.5837,
+            28.7860
+        ],
+
+        [
+            -31.5850,
+            28.7831
+        ],
+
+        [
+            -31.5842,
+            28.7812
+        ]
+
+    ];
+
+
+    /*
+     * Draw farm polygon.
+     */
+
+    const farmPolygon =
+        L.polygon(
+            farmBoundary,
+            {
+                color: "#34d399",
+
+                weight: 2,
+
+                fillColor: "#22c55e",
+
+                fillOpacity: 0.20
+            }
+        ).addTo(map);
+
+
+    /*
+     * Farm marker.
+     */
+
+    const marker =
+        L.marker(
+            farmCoordinates
+        ).addTo(map);
+
+
+    marker.bindPopup(`
+        <div style="
+            min-width:180px;
+            font-family:Arial,sans-serif;
+        ">
+
+            <strong>
+                LIVA GeoSense Farm
+            </strong>
+
+            <br><br>
+
+            Crop:
+            ${GeoSenseState.farm.crop}
+
+            <br>
+
+            Area:
+            ${GeoSenseState.farm.hectares}
+            ha
+
+            <br>
+
+            NDVI:
+            ${GeoSenseState.observations.currentNDVI}
+
+            <br><br>
+
+            <strong>
+                Risk:
+                ${GeoSenseState.risk.level}
+            </strong>
+
+        </div>
+    `);
+
+
+    /*
+     * Polygon popup.
+     */
+
+    farmPolygon.bindPopup(`
+        <strong>
+            ${GeoSenseState.farm.name}
+        </strong>
+
+        <br><br>
+
+        Farm ID:
+        ${GeoSenseState.farm.id}
+
+        <br>
+
+        Area:
+        ${GeoSenseState.farm.hectares} ha
+
+        <br>
+
+        Crop:
+        ${GeoSenseState.farm.crop}
+    `);
+
+
+    /*
+     * Click event.
+     */
+
+    farmPolygon.on(
         "click",
         () => {
 
-            map.classList.toggle(
-                "map-focused"
-            );
-
-
             console.log(
-                "GeoSense farm map selected."
+                "Farm boundary selected."
             );
 
         }
     );
 
-}
+
+    /*
+     * Save map instance globally.
+     *
+     * This allows future GeoSense
+     * layers to interact with it.
+     */
+
+    window.GeoSenseMap =
+        map;
+
+
+    window.GeoSenseFarmPolygon =
+        farmPolygon;
+
+
+    console.log(
+        "Interactive GeoSense map ready."
+    );
+
+       }
 
 
 /* =========================================================
