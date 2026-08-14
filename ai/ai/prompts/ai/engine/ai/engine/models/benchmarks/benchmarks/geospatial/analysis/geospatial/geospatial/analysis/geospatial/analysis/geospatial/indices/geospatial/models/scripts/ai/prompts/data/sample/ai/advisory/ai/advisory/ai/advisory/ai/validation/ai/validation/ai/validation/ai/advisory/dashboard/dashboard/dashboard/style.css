@@ -2635,3 +2635,193 @@ nav {
         rgba(0,0,0,.3);
 
        }
+
+       .intelligence-card {
+
+    background:
+        linear-gradient(
+            135deg,
+            #0f172a,
+            #1e293b
+        );
+
+    color: white;
+
+    border-radius:
+        22px;
+
+    padding:
+        26px;
+
+    box-shadow:
+        0 15px 40px
+        rgba(15,23,42,.20);
+
+}
+
+
+.intelligence-header {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        flex-start;
+
+    gap:
+        20px;
+
+}
+
+
+.intelligence-header h2 {
+
+    margin:
+        6px 0 0;
+
+    font-size:
+        23px;
+
+}
+
+
+.risk-badge {
+
+    padding:
+        8px 14px;
+
+    border-radius:
+        20px;
+
+    background:
+        rgba(255,255,255,.12);
+
+    font-size:
+        12px;
+
+    font-weight:
+        700;
+
+}
+
+
+.risk-score {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:
+        15px;
+
+    margin-top:
+        28px;
+
+}
+
+
+.risk-score div {
+
+    padding:
+        18px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.10);
+
+    border-radius:
+        16px;
+
+    background:
+        rgba(255,255,255,.06);
+
+}
+
+
+.risk-score small {
+
+    display:
+        block;
+
+    font-size:
+        10px;
+
+    letter-spacing:
+        1px;
+
+    opacity:
+        .65;
+
+}
+
+
+.risk-score strong {
+
+    display:
+        block;
+
+    font-size:
+        30px;
+
+    margin-top:
+        5px;
+
+}
+
+
+.advisory-box {
+
+    margin-top:
+        20px;
+
+    padding:
+        18px;
+
+    border-radius:
+        16px;
+
+    background:
+        rgba(255,255,255,.08);
+
+}
+
+
+.advisory-box span {
+
+    font-size:
+        10px;
+
+    letter-spacing:
+        1.2px;
+
+    opacity:
+        .65;
+
+}
+
+
+.advisory-box h3 {
+
+    margin:
+        7px 0;
+
+}
+
+
+.advisory-box p {
+
+    margin:
+        0;
+
+    line-height:
+        1.5;
+
+    opacity:
+        .75;
+
+       }
