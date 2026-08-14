@@ -1179,6 +1179,79 @@ i<!DOCTYPE html>
 
                             <strong>
                                 0.68
+    <section class="ndvi-card">
+
+    <div class="ndvi-card-header">
+
+        <div>
+
+            <span class="eyebrow">
+                SATELLITE INTELLIGENCE
+            </span>
+
+            <h2>
+                Vegetation Health
+            </h2>
+
+        </div>
+
+        <span id="ndviStatus"
+              class="ndvi-status">
+            Awaiting analysis
+        </span>
+
+    </div>
+
+
+    <div class="ndvi-main">
+
+        <div class="ndvi-score">
+
+            <span id="ndviValue">
+                --
+            </span>
+
+            <small>
+                NDVI
+            </small>
+
+        </div>
+
+
+        <div class="ndvi-description">
+
+            <h3 id="ndviLabel">
+                No analysis yet
+            </h3>
+
+            <p id="ndviMessage">
+                Run a satellite analysis
+                to assess vegetation health.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="ndvi-scale">
+
+        <span>Low</span>
+
+        <div class="ndvi-bar">
+
+            <div
+                id="ndviIndicator"
+                class="ndvi-indicator">
+            </div>
+
+        </div>
+
+        <span>High</span>
+
+    </div>
+
+    </section>
 
 
                                 <script
@@ -1209,6 +1282,8 @@ i<!DOCTYPE html>
 
 <script src="../services/earth-observation/api-contract.js"></script>
 <script src="../data/farms/demo-farm.js"></script>
+<script src="./js/ndvi.js"></script>
+                                
 <script
     src="app.js"
 ></script>
