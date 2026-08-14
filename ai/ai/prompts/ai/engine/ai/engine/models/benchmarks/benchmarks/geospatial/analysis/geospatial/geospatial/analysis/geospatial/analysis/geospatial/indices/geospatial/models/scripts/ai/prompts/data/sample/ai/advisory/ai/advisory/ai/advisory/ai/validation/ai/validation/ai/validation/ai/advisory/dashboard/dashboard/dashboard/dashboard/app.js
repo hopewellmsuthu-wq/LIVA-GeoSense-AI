@@ -2013,3 +2013,86 @@ function renderSatelliteObservation() {
     `;
 
            }
+
+async function runNDVIAnalysis() {
+
+    const request = {
+
+        boundingBox: {
+
+            south:
+                currentFarm.south,
+
+            west:
+                currentFarm.west,
+
+            north:
+                currentFarm.north,
+
+            east:
+                currentFarm.east
+
+        },
+
+        startDate:
+            selectedStartDate,
+
+        endDate:
+            selectedEndDate,
+
+        width:
+            512,
+
+        height:
+            512
+
+    };
+
+
+    const response =
+        await fetch(
+            "/api/earth-observation/ndvi",
+            {
+
+                method:
+                    "POST",
+
+                headers: {
+
+                    "Content-Type":
+                        "application/json"
+
+                },
+
+                body:
+                    JSON.stringify(
+                        request
+                    )
+
+            }
+        );
+
+
+    if (!response.ok) {
+
+        throw new Error(
+            "NDVI analysis failed."
+        );
+
+    }
+
+
+    const rasterBuffer =
+        await response.arrayBuffer();
+
+
+    await GeoSenseNDVIMap
+        .displayNDVIRaster(
+            map,
+            rasterBuffer
+        );
+
+
+    return true;
+
+                   }
