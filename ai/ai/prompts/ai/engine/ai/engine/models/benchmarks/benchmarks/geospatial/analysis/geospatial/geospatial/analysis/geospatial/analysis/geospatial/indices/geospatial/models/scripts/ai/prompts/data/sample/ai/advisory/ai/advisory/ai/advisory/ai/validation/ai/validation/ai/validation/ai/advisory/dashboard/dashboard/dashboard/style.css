@@ -3192,3 +3192,160 @@ nav {
     }
 
        }
+
+       .stress-popup {
+
+    width:
+        280px;
+
+    padding:
+        4px;
+
+}
+
+
+.stress-popup-header {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    margin-bottom:
+        12px;
+
+}
+
+
+.stress-popup-header span {
+
+    font-size:
+        9px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        1.2px;
+
+    color:
+        #64748b;
+
+}
+
+
+.stress-popup-header strong {
+
+    font-size:
+        10px;
+
+    padding:
+        5px 8px;
+
+    border-radius:
+        20px;
+
+    background:
+        #fee2e2;
+
+    color:
+        #b91c1c;
+
+}
+
+
+.stress-popup h3 {
+
+    margin:
+        0 0 10px;
+
+    font-size:
+        18px;
+
+}
+
+
+.stress-popup p {
+
+    color:
+        #64748b;
+
+    font-size:
+        13px;
+
+    line-height:
+        1.5;
+
+}
+
+
+.stress-metric {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    padding:
+        12px;
+
+    margin:
+        12px 0;
+
+    border-radius:
+        12px;
+
+    background:
+        #f8fafc;
+
+}
+
+
+.stress-metric span {
+
+    color:
+        #64748b;
+
+}
+
+
+.stress-metric strong {
+
+    font-size:
+        20px;
+
+}
+
+
+.create-task-button {
+
+    width:
+        100%;
+
+    border:
+        0;
+
+    padding:
+        12px;
+
+    border-radius:
+        10px;
+
+    background:
+        #0f172a;
+
+    color:
+        white;
+
+    font-weight:
+        700;
+
+    cursor:
+        pointer;
+
+   }
