@@ -1558,3 +1558,56 @@ function initialiseNDVIChart() {
     );
 
 }
+
+function calculateGeoSenseRisk() {
+
+    if (
+        typeof GeoSenseRiskEngine ===
+        "undefined"
+    ) {
+
+        console.warn(
+            "GeoSense risk engine unavailable."
+        );
+
+        return null;
+
+    }
+
+
+    const trend =
+        GeoSenseTimeSeries.calculateChange(
+            GeoSenseNDVIHistory
+        );
+
+
+    const risk =
+        GeoSenseRiskEngine.assess({
+
+            ndviChange:
+                trend.absolute,
+
+            currentNDVI:
+                GeoSenseState
+                    .observations
+                    .currentNDVI,
+
+            rainfall:
+                GeoSenseState
+                    .observations
+                    .rainfall,
+
+            soilMoisture:
+                GeoSenseState
+                    .observations
+                    .soilMoisture,
+
+            stressedZones:
+                1
+
+        });
+
+
+    return risk;
+
+           }
