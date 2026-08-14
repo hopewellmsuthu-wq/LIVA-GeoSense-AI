@@ -1665,3 +1665,91 @@ function generateGeoSenseAdvisory() {
     );
 
            }
+
+function renderGeoSenseAdvisory() {
+
+    const advisory =
+        GeoSenseState.advisory;
+
+
+    if (!advisory) {
+
+        return;
+
+    }
+
+
+    const priority =
+        getElement(
+            "#advisoryPriority"
+        );
+
+
+    const summary =
+        getElement(
+            "#advisorySummary"
+        );
+
+
+    const actions =
+        getElement(
+            "#advisoryActions"
+        );
+
+
+    if (priority) {
+
+        priority.textContent =
+            advisory.priority;
+
+    }
+
+
+    if (summary) {
+
+        summary.textContent =
+            advisory.summary;
+
+    }
+
+
+    if (actions) {
+
+        actions.innerHTML =
+            advisory.actions
+                .map(
+                    item => `
+
+                    <div
+                        class="advisory-action"
+                    >
+
+                        <div
+                            class="action-priority"
+                        >
+                            ${item.priority}
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                ${item.action}
+                            </strong>
+
+                            <p>
+                                ${item.reason}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    `
+                )
+                .join("");
+
+    }
+
+       }
+
+renderGeoSenseAdvisory();
