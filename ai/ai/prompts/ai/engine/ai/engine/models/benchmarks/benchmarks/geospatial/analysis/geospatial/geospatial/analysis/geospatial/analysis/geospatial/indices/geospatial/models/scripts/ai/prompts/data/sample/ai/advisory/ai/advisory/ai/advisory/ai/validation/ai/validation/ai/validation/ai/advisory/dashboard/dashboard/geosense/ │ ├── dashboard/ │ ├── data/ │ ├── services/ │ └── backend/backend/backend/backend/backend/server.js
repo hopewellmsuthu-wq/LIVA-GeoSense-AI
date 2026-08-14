@@ -10,6 +10,12 @@
 
 require("dotenv").config();
 
+const {
+    searchScenes
+} = require(
+    "./controllers/earth-observation-controller"
+);
+
 
 const express =
     require("express");
@@ -123,7 +129,8 @@ app.get(
 
 app.post(
     "/api/earth-observation/scenes",
-    (req, res) => {
+    searchScenes
+);
 
         const {
 
