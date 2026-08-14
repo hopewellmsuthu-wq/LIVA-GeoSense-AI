@@ -3087,3 +3087,108 @@ nav {
         #64748b;
 
    }
+.satellite-loading {
+
+    position:
+        absolute;
+
+    top:
+        20px;
+
+    left:
+        50%;
+
+    transform:
+        translateX(-50%);
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        12px;
+
+    padding:
+        12px 18px;
+
+    background:
+        rgba(15,23,42,.94);
+
+    color:
+        white;
+
+    border-radius:
+        14px;
+
+    z-index:
+        2000;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,.2);
+
+}
+
+
+.satellite-loading span {
+
+    display:
+        block;
+
+    font-size:
+        11px;
+
+    opacity:
+        .65;
+
+    margin-top:
+        3px;
+
+}
+
+
+.loading-spinner {
+
+    width:
+        22px;
+
+    height:
+        22px;
+
+    border:
+        3px solid
+        rgba(255,255,255,.25);
+
+    border-top-color:
+        white;
+
+    border-radius:
+        50%;
+
+    animation:
+        geosense-spin
+        .8s linear infinite;
+
+}
+
+
+.hidden {
+
+    display:
+        none;
+
+}
+
+
+@keyframes geosense-spin {
+
+    to {
+
+        transform:
+            rotate(360deg);
+
+    }
+
+       }
