@@ -2825,3 +2825,170 @@ nav {
         .75;
 
        }
+
+  .trend-card {
+
+    background: #ffffff;
+
+    border:
+        1px solid #e5e7eb;
+
+    border-radius:
+        22px;
+
+    padding:
+        25px;
+
+    box-shadow:
+        0 12px 35px
+        rgba(0,0,0,.07);
+
+}
+
+
+.trend-header {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        flex-start;
+
+}
+
+
+.trend-header h2 {
+
+    margin:
+        6px 0 0;
+
+}
+
+
+.trend-badge {
+
+    padding:
+        8px 13px;
+
+    border-radius:
+        20px;
+
+    background:
+        #fff7ed;
+
+    color:
+        #c2410c;
+
+    font-size:
+        12px;
+
+    font-weight:
+        700;
+
+}
+
+
+.trend-main {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap:
+        15px;
+
+    margin-top:
+        25px;
+
+}
+
+
+.trend-main div {
+
+    padding:
+        16px;
+
+    border-radius:
+        15px;
+
+    background:
+        #f8fafc;
+
+}
+
+
+.trend-main small {
+
+    display:
+        block;
+
+    color:
+        #64748b;
+
+    font-size:
+        10px;
+
+    letter-spacing:
+        1px;
+
+}
+
+
+.trend-main strong {
+
+    display:
+        block;
+
+    margin-top:
+        6px;
+
+    font-size:
+        25px;
+
+}
+
+
+.trend-message {
+
+    margin-top:
+        18px;
+
+    padding:
+        17px;
+
+    border-radius:
+        15px;
+
+    background:
+        #f8fafc;
+
+}
+
+
+.trend-message span {
+
+    font-size:
+        10px;
+
+    letter-spacing:
+        1px;
+
+    color:
+        #64748b;
+
+}
+
+
+.trend-message p {
+
+    margin:
+        7px 0 0;
+
+    line-height:
+        1.5;
+
+       } 
