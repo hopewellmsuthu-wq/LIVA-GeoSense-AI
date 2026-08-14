@@ -142,6 +142,297 @@ i<!DOCTYPE html>
                     </h2>
 
                 </div>
+                <section class="command-centre">
+
+    <div class="command-header">
+
+        <div>
+            <span class="eyebrow">
+                LIVA GEOSENSE
+            </span>
+
+            <h1>
+                Agricultural Intelligence
+            </h1>
+
+            <p>
+                Satellite-powered environmental
+                monitoring and decision support.
+            </p>
+        </div>
+
+        <div class="live-indicator">
+            <span></span>
+            MONITORING
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         KEY INTELLIGENCE METRICS
+         ================================================= -->
+
+    <div class="intelligence-grid">
+
+        <article class="intelligence-card">
+
+            <span class="metric-label">
+                FARM HEALTH
+            </span>
+
+            <strong
+                id="farmHealthValue"
+                class="metric-value"
+            >
+                --
+            </strong>
+
+            <span
+                id="farmHealthStatus"
+                class="metric-status"
+            >
+                Calculating
+            </span>
+
+        </article>
+
+
+        <article class="intelligence-card">
+
+            <span class="metric-label">
+                RISK SCORE
+            </span>
+
+            <strong
+                id="riskScoreValue"
+                class="metric-value"
+            >
+                --
+            </strong>
+
+            <span
+                id="riskLevelValue"
+                class="metric-status"
+            >
+                Calculating
+            </span>
+
+        </article>
+
+
+        <article class="intelligence-card">
+
+            <span class="metric-label">
+                CURRENT NDVI
+            </span>
+
+            <strong
+                id="currentNDVIValue"
+                class="metric-value"
+            >
+                --
+            </strong>
+
+            <span
+                id="ndviTrendValue"
+                class="metric-status"
+            >
+                Monitoring
+            </span>
+
+        </article>
+
+
+        <article class="intelligence-card">
+
+            <span class="metric-label">
+                LAST OBSERVATION
+            </span>
+
+            <strong
+                id="observationDateValue"
+                class="metric-value small"
+            >
+                --
+            </strong>
+
+            <span
+                id="cloudCoverValue"
+                class="metric-status"
+            >
+                --
+            </span>
+
+        </article>
+
+    </div>
+
+
+    <!-- =================================================
+         MAP
+         ================================================= -->
+
+    <div class="command-map-card">
+
+        <div class="section-header">
+
+            <div>
+
+                <span class="eyebrow">
+                    GEOSPATIAL MONITORING
+                </span>
+
+                <h2>
+                    Farm Intelligence Map
+                </h2>
+
+            </div>
+
+            <span class="data-badge">
+                NDVI
+            </span>
+
+        </div>
+
+
+        <div
+            id="farmMap"
+            class="farm-map"
+        ></div>
+
+    </div>
+
+
+    <!-- =================================================
+         ANALYTICS
+         ================================================= -->
+
+    <div class="analytics-grid">
+
+        <div class="analytics-card">
+
+            <div class="section-header">
+
+                <div>
+
+                    <span class="eyebrow">
+                        REMOTE SENSING
+                    </span>
+
+                    <h2>
+                        Vegetation Trend
+                    </h2>
+
+                </div>
+
+                <span class="data-badge">
+                    NDVI
+                </span>
+
+            </div>
+
+
+            <div class="chart-container">
+
+                <canvas
+                    id="ndviChart"
+                ></canvas>
+
+            </div>
+
+        </div>
+
+
+        <div class="analytics-card">
+
+            <div class="section-header">
+
+                <div>
+
+                    <span class="eyebrow">
+                        SATELLITE
+                    </span>
+
+                    <h2>
+                        Observation
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="satelliteObservation"
+                class="observation-panel"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         ADVISORY
+         ================================================= -->
+
+    <section
+        class="advisory-card"
+        id="geoSenseAdvisory"
+    >
+
+        <div class="advisory-header">
+
+            <div>
+
+                <span class="eyebrow">
+                    GEOSENSE INTELLIGENCE
+                </span>
+
+                <h2>
+                    Field Advisory
+                </h2>
+
+            </div>
+
+            <span
+                id="advisoryPriority"
+                class="advisory-priority"
+            >
+                MONITOR
+            </span>
+
+        </div>
+
+
+        <p
+            id="advisorySummary"
+            class="advisory-summary"
+        >
+            Analysing available observations...
+        </p>
+
+
+        <div
+            id="advisoryActions"
+            class="advisory-actions"
+        ></div>
+
+
+        <div class="advisory-disclaimer">
+
+            GeoSense provides decision-support
+            information based on available
+            environmental observations.
+            Field verification is recommended
+            before taking agricultural action.
+
+        </div>
+
+    </section>
+
+                </section>
 
 
                 <div class="topbar-actions">
