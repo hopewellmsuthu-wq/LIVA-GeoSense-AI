@@ -1659,3 +1659,86 @@ nav {
     box-shadow:
         0 0 8px rgba(251,113,133,0.5);
    }
+
+   /* =========================================================
+   NDVI CHART
+   ========================================================= */
+
+.chart-card {
+
+    margin-top:
+        20px;
+
+    padding:
+        20px;
+
+    background:
+        rgba(15, 29, 48, 0.72);
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    border-radius:
+        16px;
+
+    box-shadow:
+        0 18px 40px rgba(0,0,0,0.16);
+}
+
+
+.chart-header {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    margin-bottom:
+        15px;
+}
+
+
+.chart-header h3 {
+
+    margin:
+        5px 0 0;
+
+    font-size:
+        18px;
+}
+
+
+.chart-status {
+
+    padding:
+        6px 10px;
+
+    border-radius:
+        20px;
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        1px;
+
+    background:
+        rgba(56,189,248,0.10);
+}
+
+
+.chart-container {
+
+    height:
+        260px;
+
+    position:
+        relative;
+       }
