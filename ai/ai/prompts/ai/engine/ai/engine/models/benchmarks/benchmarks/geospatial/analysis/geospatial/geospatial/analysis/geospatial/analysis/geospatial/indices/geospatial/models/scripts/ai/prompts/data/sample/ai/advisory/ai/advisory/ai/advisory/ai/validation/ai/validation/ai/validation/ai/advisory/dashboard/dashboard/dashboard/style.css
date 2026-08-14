@@ -2992,3 +2992,98 @@ nav {
         1.5;
 
        } 
+
+.ndvi-legend {
+
+    position:
+        absolute;
+
+    left:
+        20px;
+
+    bottom:
+        20px;
+
+    width:
+        230px;
+
+    padding:
+        14px;
+
+    background:
+        rgba(255,255,255,.94);
+
+    backdrop-filter:
+        blur(10px);
+
+    border-radius:
+        14px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,.12);
+
+    z-index:
+        1000;
+
+}
+
+
+.legend-title {
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        1px;
+
+    margin-bottom:
+        9px;
+
+}
+
+
+.legend-gradient {
+
+    height:
+        10px;
+
+    border-radius:
+        10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #b91c1c,
+            #ef4444,
+            #f97316,
+            #eab308,
+            #84cc16,
+            #22c55e,
+            #15803d
+        );
+
+}
+
+
+.legend-labels {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    margin-top:
+        7px;
+
+    font-size:
+        8px;
+
+    color:
+        #64748b;
+
+   }
