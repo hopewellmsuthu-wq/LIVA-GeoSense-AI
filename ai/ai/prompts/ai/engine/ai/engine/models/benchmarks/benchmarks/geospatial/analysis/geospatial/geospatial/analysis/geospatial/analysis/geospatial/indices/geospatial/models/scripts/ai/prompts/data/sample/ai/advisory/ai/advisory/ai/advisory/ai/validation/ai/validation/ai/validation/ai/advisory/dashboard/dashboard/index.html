@@ -1667,6 +1667,113 @@
     </div>
 
             </section> 
+<section class="ndvi-analysis-card">
+
+    <div class="panel-header">
+
+        <div>
+
+            <span class="eyebrow">
+                VEGETATION INTELLIGENCE
+            </span>
+
+            <h2>
+                NDVI Health Timeline
+            </h2>
+
+            <p class="panel-description">
+                Monitoring vegetation health across
+                recent satellite observations.
+            </p>
+
+        </div>
+
+        <div class="ndvi-period">
+
+            LAST 30 DAYS
+
+        </div>
+
+    </div>
+
+
+    <div class="ndvi-summary">
+
+        <div class="ndvi-summary-item">
+
+            <span>
+                CURRENT NDVI
+            </span>
+
+            <strong id="timelineCurrentNDVI">
+                0.46
+            </strong>
+
+        </div>
+
+
+        <div class="ndvi-summary-item">
+
+            <span>
+                PREVIOUS NDVI
+            </span>
+
+            <strong id="timelinePreviousNDVI">
+                0.51
+            </strong>
+
+        </div>
+
+
+        <div class="ndvi-summary-item">
+
+            <span>
+                CHANGE
+            </span>
+
+            <strong id="timelineChange">
+                -9.8%
+            </strong>
+
+        </div>
+
+
+        <div class="ndvi-summary-item">
+
+            <span>
+                TREND
+            </span>
+
+            <strong
+                id="timelineTrend"
+                class="trend-negative">
+
+                DECLINING
+
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <div class="ndvi-chart-wrapper">
+
+        <canvas
+            id="ndviTimelineChart">
+        </canvas>
+
+    </div>
+
+
+    <div
+        id="ndviInsight"
+        class="ndvi-insight">
+
+    </div>
+
+</section>
+                                
  <div id="geosenseMap" class="mission-map"></div>
 
     <script src="https://unpkg.com/georaster"></script>
@@ -1717,6 +1824,23 @@
     );
 
 </script>
+<script src="./js/stress-zones.js"></script>
+<script src="./js/geosense-map.js"></script>
+
+    document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        initializeGeoSenseMap();
+
+        loadMissionControl();
+
+        loadAlerts();
+
+    }
+);
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./js/ndvi-timeline.js"></script>
                                 
 <script
     src="app.js"
