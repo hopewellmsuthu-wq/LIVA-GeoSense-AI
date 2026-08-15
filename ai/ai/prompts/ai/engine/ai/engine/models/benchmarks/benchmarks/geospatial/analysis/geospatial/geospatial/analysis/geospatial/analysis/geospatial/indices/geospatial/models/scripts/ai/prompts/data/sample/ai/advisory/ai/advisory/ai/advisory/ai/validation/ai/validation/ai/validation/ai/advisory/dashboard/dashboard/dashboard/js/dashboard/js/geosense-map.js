@@ -381,6 +381,71 @@ async function createTaskFromZone(
 
 }
 
+function highlightAffectedZones() {
+
+    const zones =
+        document.querySelectorAll(
+            ".stress-zone"
+        );
+
+
+    zones.forEach(
+        zone => {
+
+            zone.classList.add(
+                "zone-highlight"
+            );
+
+        }
+    );
+
+
+    const highRisk =
+        document.querySelectorAll(
+            ".severity-high"
+        );
+
+
+    highRisk.forEach(
+        zone => {
+
+            zone.scrollIntoView({
+
+                behavior:
+                    "smooth",
+
+                block:
+                    "center"
+
+            });
+
+        }
+    );
+
+
+    setTimeout(
+        () => {
+
+            zones.forEach(
+                zone => {
+
+                    zone.classList.remove(
+                        "zone-highlight"
+                    );
+
+                }
+            );
+
+        },
+        4000
+    );
+
+}
+
+
+window.highlightAffectedZones =
+    highlightAffectedZones;
+
 
 window.initializeGeoSenseMap =
     initializeGeoSenseMap;
