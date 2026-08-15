@@ -3349,3 +3349,506 @@ nav {
         pointer;
 
    }
+       .mission-control {
+
+    padding: 25px;
+
+    background:
+        #f8fafc;
+
+}
+
+
+.mission-header {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        flex-start;
+
+    gap: 20px;
+
+    margin-bottom:
+        25px;
+
+}
+
+
+.mission-header h1 {
+
+    margin:
+        5px 0;
+
+    font-size:
+        32px;
+
+    letter-spacing:
+        -1px;
+
+}
+
+
+.mission-header p {
+
+    margin: 0;
+
+    color:
+        #64748b;
+
+}
+
+
+.mission-status {
+
+    display: flex;
+
+    align-items:
+        center;
+
+    gap: 8px;
+
+    padding:
+        9px 14px;
+
+    border-radius:
+        20px;
+
+    background:
+        #ecfdf5;
+
+    color:
+        #047857;
+
+    font-size:
+        11px;
+
+    font-weight:
+        800;
+
+}
+
+
+.status-dot {
+
+    width:
+        8px;
+
+    height:
+        8px;
+
+    border-radius:
+        50%;
+
+    background:
+        #10b981;
+
+}
+
+
+.mission-kpis {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 16px;
+
+    margin-bottom:
+        20px;
+
+}
+
+
+.mission-kpi {
+
+    background:
+        white;
+
+    border:
+        1px solid #e5e7eb;
+
+    border-radius:
+        18px;
+
+    padding:
+        20px;
+
+    box-shadow:
+        0 6px 20px
+        rgba(15,23,42,.05);
+
+}
+
+
+.mission-kpi span {
+
+    display: block;
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        1px;
+
+    color:
+        #64748b;
+
+}
+
+
+.mission-kpi strong {
+
+    display: block;
+
+    margin-top:
+        8px;
+
+    font-size:
+        30px;
+
+}
+
+
+.mission-kpi small {
+
+    display: block;
+
+    margin-top:
+        5px;
+
+    color:
+        #94a3b8;
+
+}
+
+
+.mission-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        2fr 1fr;
+
+    gap: 20px;
+
+}
+
+
+.mission-map-card,
+.alerts-panel,
+.task-panel {
+
+    background:
+        white;
+
+    border:
+        1px solid #e5e7eb;
+
+    border-radius:
+        20px;
+
+    padding:
+        20px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(15,23,42,.05);
+
+}
+
+
+.mission-map {
+
+    height:
+        500px;
+
+    margin-top:
+        18px;
+
+    border-radius:
+        15px;
+
+    overflow:
+        hidden;
+
+}
+
+
+.panel-header {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+}
+
+
+.panel-header h2 {
+
+    margin:
+        5px 0 0;
+
+    font-size:
+        20px;
+
+}
+
+
+.refresh-button {
+
+    border:
+        0;
+
+    background:
+        #0f172a;
+
+    color:
+        white;
+
+    padding:
+        9px 14px;
+
+    border-radius:
+        9px;
+
+    cursor:
+        pointer;
+
+}
+
+
+.alerts-list {
+
+    margin-top:
+        18px;
+
+}
+
+
+.alert-item {
+
+    padding:
+        15px;
+
+    border-radius:
+        14px;
+
+    margin-bottom:
+        10px;
+
+    background:
+        #f8fafc;
+
+    border-left:
+        4px solid #ef4444;
+
+}
+
+
+.alert-item h3 {
+
+    margin:
+        0 0 5px;
+
+    font-size:
+        14px;
+
+}
+
+
+.alert-item p {
+
+    margin:
+        0;
+
+    font-size:
+        12px;
+
+    line-height:
+        1.5;
+
+    color:
+        #64748b;
+
+}
+
+
+.task-panel {
+
+    margin-top:
+        20px;
+
+}
+
+
+.task-count {
+
+    padding:
+        7px 11px;
+
+    background:
+        #f1f5f9;
+
+    border-radius:
+        20px;
+
+    font-size:
+        11px;
+
+}
+
+
+.task-list {
+
+    margin-top:
+        18px;
+
+}
+
+
+.task-item {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr auto auto;
+
+    gap:
+        15px;
+
+    align-items:
+        center;
+
+    padding:
+        15px;
+
+    border-bottom:
+        1px solid #e5e7eb;
+
+}
+
+
+.task-item:last-child {
+
+    border-bottom:
+        0;
+
+}
+
+
+.task-title {
+
+    font-weight:
+        700;
+
+}
+
+
+.task-meta {
+
+    font-size:
+        11px;
+
+    color:
+        #64748b;
+
+    margin-top:
+        4px;
+
+}
+
+
+.task-status {
+
+    padding:
+        6px 10px;
+
+    border-radius:
+        20px;
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    background:
+        #fef3c7;
+
+    color:
+        #92400e;
+
+}
+
+
+@media (
+    max-width: 900px
+) {
+
+    .mission-kpis {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+
+    .mission-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+}
+
+
+@media (
+    max-width: 600px
+) {
+
+    .mission-header {
+
+        flex-direction:
+            column;
+
+    }
+
+
+    .mission-kpis {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .mission-map {
+
+        height:
+            400px;
+
+    }
+
+
+    .task-item {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+   }
