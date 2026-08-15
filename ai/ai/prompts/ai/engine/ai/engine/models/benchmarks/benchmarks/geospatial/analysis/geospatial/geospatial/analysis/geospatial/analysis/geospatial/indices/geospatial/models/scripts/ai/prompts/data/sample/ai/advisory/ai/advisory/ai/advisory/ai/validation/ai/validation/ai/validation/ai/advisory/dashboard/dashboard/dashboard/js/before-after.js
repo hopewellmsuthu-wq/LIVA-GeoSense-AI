@@ -123,6 +123,71 @@ function loadBeforeAfterAnalysis() {
 
 }
 
+function connectAffectedZoneButton() {
+
+    const button =
+        document.getElementById(
+            "viewAffectedZones"
+        );
+
+
+    if (!button) {
+
+        return;
+
+    }
+
+
+    button.addEventListener(
+        "click",
+        () => {
+
+            const map =
+                document.getElementById(
+                    "geosenseMap"
+                );
+
+
+            if (map) {
+
+                map.scrollIntoView({
+
+                    behavior:
+                        "smooth",
+
+                    block:
+                        "center"
+
+                });
+
+            }
+
+
+            setTimeout(
+                () => {
+
+                    if (
+                        typeof highlightAffectedZones ===
+                        "function"
+                    ) {
+
+                        highlightAffectedZones();
+
+                    }
+
+                },
+                600
+            );
+
+        }
+    );
+
+}
+
+
+window.connectAffectedZoneButton =
+    connectAffectedZoneButton;
+
 
 window.loadBeforeAfterAnalysis =
     loadBeforeAfterAnalysis;
