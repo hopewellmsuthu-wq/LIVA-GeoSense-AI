@@ -441,3 +441,32 @@ app.get(
     "/api/ndvi/latest/:farmId",
     getLatest
 );
+const {
+
+    listAlerts,
+
+    activeAlerts,
+
+    resolve
+
+} = require(
+    "./controllers/alert-controller"
+);
+
+
+app.get(
+    "/api/alerts",
+    listAlerts
+);
+
+
+app.get(
+    "/api/alerts/active",
+    activeAlerts
+);
+
+
+app.patch(
+    "/api/alerts/:alertId/resolve",
+    resolve
+);
