@@ -73,3 +73,14 @@ function calculateRasterStatistics(
 module.exports = {
     calculateRasterStatistics
 };
+
+const {
+    calculateRasterStatistics
+} = require(
+    "./raster-statistics"
+);
+
+const statistics =
+    calculateRasterStatistics(
+        decoded.values
+    );
