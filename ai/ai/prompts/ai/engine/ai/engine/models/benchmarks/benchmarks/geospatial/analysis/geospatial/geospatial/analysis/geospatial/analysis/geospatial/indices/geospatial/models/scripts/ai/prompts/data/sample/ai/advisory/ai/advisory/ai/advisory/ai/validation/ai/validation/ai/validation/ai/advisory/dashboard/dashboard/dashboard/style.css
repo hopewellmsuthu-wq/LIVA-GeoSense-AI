@@ -4455,3 +4455,381 @@ nav {
     }
 
    }
+.comparison-card {
+
+    margin-top:
+        20px;
+
+    padding:
+        22px;
+
+    background:
+        white;
+
+    border:
+        1px solid #e5e7eb;
+
+    border-radius:
+        20px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(15,23,42,.05);
+
+}
+
+
+.comparison-status {
+
+    padding:
+        7px 11px;
+
+    border-radius:
+        20px;
+
+    background:
+        #fff7ed;
+
+    color:
+        #c2410c;
+
+    font-size:
+        10px;
+
+    font-weight:
+        900;
+
+}
+
+
+.comparison-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr 50px 1fr;
+
+    align-items:
+        center;
+
+    gap:
+        15px;
+
+    margin-top:
+        20px;
+
+}
+
+
+.observation-card {
+
+    overflow:
+        hidden;
+
+    border:
+        1px solid #e5e7eb;
+
+    border-radius:
+        16px;
+
+    background:
+        #f8fafc;
+
+}
+
+
+.observation-header {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    padding:
+        14px 16px;
+
+    background:
+        white;
+
+}
+
+
+.observation-header span {
+
+    font-size:
+        10px;
+
+    font-weight:
+        900;
+
+    color:
+        #64748b;
+
+}
+
+
+.observation-header strong {
+
+    font-size:
+        10px;
+
+    color:
+        #0f172a;
+
+}
+
+
+.satellite-preview {
+
+    height:
+        220px;
+
+    padding:
+        20px;
+
+    overflow:
+        hidden;
+
+}
+
+
+.before-preview {
+
+    background:
+        linear-gradient(
+            135deg,
+            #166534,
+            #4ade80,
+            #84cc16
+        );
+
+}
+
+
+.after-preview {
+
+    background:
+        linear-gradient(
+            135deg,
+            #854d0e,
+            #d97706,
+            #84cc16
+        );
+
+}
+
+
+.field-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    grid-template-rows:
+        repeat(3, 1fr);
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    gap:
+        5px;
+
+    transform:
+        rotate(-2deg);
+
+}
+
+
+.field-grid span {
+
+    border-radius:
+        5px;
+
+    background:
+        rgba(255,255,255,.16);
+
+    border:
+        1px solid
+        rgba(255,255,255,.2);
+
+}
+
+
+.after-preview
+.field-grid span:nth-child(2),
+.after-preview
+.field-grid span:nth-child(3),
+.after-preview
+.field-grid span:nth-child(6),
+.after-preview
+.field-grid span:nth-child(7),
+.after-preview
+.field-grid span:nth-child(10) {
+
+    background:
+        rgba(127,29,29,.42);
+
+}
+
+
+.observation-value {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    padding:
+        15px 16px;
+
+    background:
+        white;
+
+}
+
+
+.observation-value span {
+
+    color:
+        #64748b;
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+}
+
+
+.observation-value strong {
+
+    font-size:
+        24px;
+
+}
+
+
+.comparison-arrow {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    width:
+        45px;
+
+    height:
+        45px;
+
+    border-radius:
+        50%;
+
+    background:
+        #0f172a;
+
+    color:
+        white;
+
+    font-size:
+        22px;
+
+    font-weight:
+        800;
+
+}
+
+
+.comparison-insight {
+
+    margin-top:
+        18px;
+
+    padding:
+        18px;
+
+    border-radius:
+        15px;
+
+    background:
+        #fef2f2;
+
+    border:
+        1px solid #fecaca;
+
+}
+
+
+.comparison-insight strong {
+
+    display:
+        block;
+
+    color:
+        #991b1b;
+
+    font-size:
+        14px;
+
+}
+
+
+.comparison-insight p {
+
+    margin:
+        6px 0 0;
+
+    color:
+        #64748b;
+
+    font-size:
+        12px;
+
+    line-height:
+        1.6;
+
+}
+
+
+@media (
+    max-width: 700px
+) {
+
+    .comparison-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .comparison-arrow {
+
+        margin:
+            auto;
+
+        transform:
+            rotate(90deg);
+
+    }
+
+   }
