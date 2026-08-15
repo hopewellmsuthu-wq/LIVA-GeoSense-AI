@@ -411,3 +411,33 @@ app.get(
     "/api/field-tasks",
     getTasks
 );
+
+const {
+
+    saveObservation,
+
+    getHistory,
+
+    getLatest
+
+} = require(
+    "./controllers/ndvi-history-controller"
+);
+
+
+app.post(
+    "/api/ndvi/observations",
+    saveObservation
+);
+
+
+app.get(
+    "/api/ndvi/history/:farmId",
+    getHistory
+);
+
+
+app.get(
+    "/api/ndvi/latest/:farmId",
+    getLatest
+);
