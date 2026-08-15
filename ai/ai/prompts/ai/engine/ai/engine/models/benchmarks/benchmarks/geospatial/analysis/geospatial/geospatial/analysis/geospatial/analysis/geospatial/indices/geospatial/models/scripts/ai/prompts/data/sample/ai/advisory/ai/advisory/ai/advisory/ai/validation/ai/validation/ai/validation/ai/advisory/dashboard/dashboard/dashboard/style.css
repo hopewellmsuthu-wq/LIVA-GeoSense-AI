@@ -4833,3 +4833,49 @@ nav {
     }
 
    }
+
+       .view-affected-btn {
+
+    margin-top:
+        14px;
+
+    padding:
+        12px 18px;
+
+    border:
+        0;
+
+    border-radius:
+        11px;
+
+    background:
+        #0f172a;
+
+    color:
+        white;
+
+    font-size:
+        12px;
+
+    font-weight:
+        800;
+
+    cursor:
+        pointer;
+
+    transition:
+        transform .2s ease,
+        opacity .2s ease;
+
+}
+
+
+.view-affected-btn:hover {
+
+    transform:
+        translateY(-2px);
+
+    opacity:
+        .9;
+
+}
