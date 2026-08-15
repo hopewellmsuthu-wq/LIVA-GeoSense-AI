@@ -1969,6 +1969,11 @@
 
 <script src="./js/mission-control.js"></script>
 <script>
+<script src="./js/before-after.js"></script>
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./js/ndvi-timeline.js"></script>
+                                
 
     document.addEventListener(
         "DOMContentLoaded",
@@ -1979,25 +1984,28 @@
         }
     );
 
-</script>
-<script src="./js/stress-zones.js"></script>
-<script src="./js/geosense-map.js"></script>
+
+
+    <script>
 
     document.addEventListener(
-    "DOMContentLoaded",
-    () => {
+        "DOMContentLoaded",
+        () => {
 
-        initializeGeoSenseMap();
+            initializeGeoSenseMap();
 
-        loadMissionControl();
+            loadMissionControl();
 
-        loadAlerts();
+            loadAlerts();
 
-    }
-);
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="./js/ndvi-timeline.js"></script>
-                                
+            loadNDVITimeline();
+
+            loadBeforeAfterAnalysis();
+
+        }
+    );
+
+
 <script
     src="app.js"
 ></script>
