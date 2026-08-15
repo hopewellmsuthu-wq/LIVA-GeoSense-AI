@@ -1451,6 +1451,222 @@
     </div>
 
     </div>
+                             <section class="mission-control">
+
+    <div class="mission-header">
+
+        <div>
+            <span class="eyebrow">
+                LIVA GEOSENSE
+            </span>
+
+            <h1>
+                Mission Control
+            </h1>
+
+            <p>
+                Earth-observation intelligence
+                for smarter field decisions.
+            </p>
+        </div>
+
+        <div class="mission-status">
+            <span class="status-dot"></span>
+            SYSTEM OPERATIONAL
+        </div>
+
+    </div>
+
+
+    <!-- KPI CARDS -->
+
+    <div class="mission-kpis">
+
+        <div class="mission-kpi">
+
+            <span>
+                FARM HEALTH
+            </span>
+
+            <strong id="farmHealth">
+                72%
+            </strong>
+
+            <small>
+                Current vegetation condition
+            </small>
+
+        </div>
+
+
+        <div class="mission-kpi">
+
+            <span>
+                ACTIVE ALERTS
+            </span>
+
+            <strong id="activeAlerts">
+                3
+            </strong>
+
+            <small>
+                Require attention
+            </small>
+
+        </div>
+
+
+        <div class="mission-kpi">
+
+            <span>
+                AVG NDVI
+            </span>
+
+            <strong id="averageNDVI">
+                0.56
+            </strong>
+
+            <small>
+                Latest observation
+            </small>
+
+        </div>
+
+
+        <div class="mission-kpi">
+
+            <span>
+                TREND
+            </span>
+
+            <strong id="farmTrend">
+                ↓ 8%
+            </strong>
+
+            <small>
+                Compared with previous observation
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <!-- MAIN GRID -->
+
+    <div class="mission-grid">
+
+
+        <!-- MAP -->
+
+        <div class="mission-map-card">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <span class="eyebrow">
+                        SPATIAL INTELLIGENCE
+                    </span>
+
+                    <h2>
+                        Field Monitoring
+                    </h2>
+
+                </div>
+
+                <button
+                    id="refreshSatellite"
+                    class="refresh-button">
+
+                    Refresh
+
+                </button>
+
+            </div>
+
+
+            <div
+                id="geosenseMap"
+                class="mission-map">
+
+            </div>
+
+        </div>
+
+
+        <!-- ALERTS -->
+
+        <div class="alerts-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <span class="eyebrow">
+                        EARLY WARNING
+                    </span>
+
+                    <h2>
+                        Active Alerts
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="alertsList"
+                class="alerts-list">
+
+                <!-- Alerts injected by JS -->
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- TASK CENTRE -->
+
+    <div class="task-panel">
+
+        <div class="panel-header">
+
+            <div>
+
+                <span class="eyebrow">
+                    FIELD OPERATIONS
+                </span>
+
+                <h2>
+                    Field Tasks
+                </h2>
+
+            </div>
+
+            <span
+                id="taskCount"
+                class="task-count">
+
+                0 tasks
+
+            </span>
+
+        </div>
+
+
+        <div
+            id="taskList"
+            class="task-list">
+
+        </div>
+
+    </div>
+
+            </section>   
 
     <script src="https://unpkg.com/georaster"></script>
 <script src="https://unpkg.com/georaster-layer-for-leaflet"></script>
