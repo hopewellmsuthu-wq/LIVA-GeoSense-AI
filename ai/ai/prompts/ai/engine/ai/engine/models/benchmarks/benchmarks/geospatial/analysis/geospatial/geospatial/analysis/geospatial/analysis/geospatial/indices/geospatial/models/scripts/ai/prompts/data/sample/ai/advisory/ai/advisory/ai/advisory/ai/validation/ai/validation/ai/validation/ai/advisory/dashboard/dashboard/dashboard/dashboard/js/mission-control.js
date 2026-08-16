@@ -1,3 +1,33 @@
+
+
+<section class="mission-control-hero">
+
+    <div>
+
+        <span class="eyebrow">
+            LIVA GEOSENSE
+        </span>
+
+        <h1>
+            Mission Control
+        </h1>
+
+        <p>
+            Satellite-powered vegetation intelligence
+            for faster field decisions.
+        </p>
+
+    </div>
+
+    <div class="mission-status">
+
+        <span class="status-dot"></span>
+
+        SYSTEM OPERATIONAL
+
+    </div>
+
+</section>
 "use strict";
 
 
