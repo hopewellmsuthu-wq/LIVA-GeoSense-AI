@@ -2151,10 +2151,11 @@
 
         }
     );
+<script src="./js/health-score.js"></script>
 
 
 
-    <script>
+<script>
 
     document.addEventListener(
         "DOMContentLoaded",
@@ -2170,9 +2171,14 @@
 
             loadBeforeAfterAnalysis();
 
+            connectAffectedZoneButton();
+
+            renderHealthScore();
+
         }
     );
 
+</script>
 
 <script
     src="app.js"
