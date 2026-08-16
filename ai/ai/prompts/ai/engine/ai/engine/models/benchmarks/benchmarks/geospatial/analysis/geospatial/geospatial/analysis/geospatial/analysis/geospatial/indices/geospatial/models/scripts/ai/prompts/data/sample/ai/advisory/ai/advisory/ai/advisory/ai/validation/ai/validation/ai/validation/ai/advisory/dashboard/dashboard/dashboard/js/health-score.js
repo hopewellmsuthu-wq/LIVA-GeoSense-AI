@@ -277,6 +277,25 @@ function setMetric(
 
 }
 
+background:
+    conic-gradient(
+        #16a34a 0 var(--score),
+        #e5e7eb var(--score) 100%
+    );
+const circle =
+    document.querySelector(
+        ".score-circle"
+    );
+
+
+if (circle) {
+
+    circle.style.setProperty(
+        "--score",
+        `${score.overallScore}%`
+    );
+
+            }
 
 window.renderHealthScore =
     renderHealthScore;
