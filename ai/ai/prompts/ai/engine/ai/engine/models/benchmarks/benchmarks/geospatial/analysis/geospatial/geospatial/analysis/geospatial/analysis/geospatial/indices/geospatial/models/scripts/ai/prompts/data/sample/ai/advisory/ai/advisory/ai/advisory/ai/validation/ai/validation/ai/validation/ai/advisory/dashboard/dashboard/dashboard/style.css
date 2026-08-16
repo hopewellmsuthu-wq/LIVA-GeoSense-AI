@@ -5695,3 +5695,139 @@ nav {
         rgba(34,197,94,.15);
 
    }
+.intelligence-strip {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 12px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.intel-item {
+
+    padding: 15px;
+
+    border:
+        1px solid #e5e7eb;
+
+    border-radius: 14px;
+
+    background: white;
+
+}
+
+
+.intel-item span {
+
+    display: block;
+
+    color: #64748b;
+
+    font-size: 9px;
+
+    font-weight: 900;
+
+    letter-spacing: .6px;
+
+}
+
+
+.intel-item strong {
+
+    display: block;
+
+    margin-top: 5px;
+
+    font-size: 21px;
+
+   }
+       @media (max-width: 700px) {
+
+    .mission-control-hero {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+
+    .mission-control-hero h1 {
+
+        font-size: 26px;
+
+    }
+
+
+    .intelligence-strip {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+
+@media (max-width: 450px) {
+
+    .intelligence-strip {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+               }
+       .geosense-loading {
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    padding: 25px;
+
+    color: #64748b;
+
+    font-size: 12px;
+
+}
+
+
+.loading-spinner {
+
+    width: 18px;
+
+    height: 18px;
+
+    border: 2px solid #e2e8f0;
+
+    border-top-color: #0f172a;
+
+    border-radius: 50%;
+
+    animation:
+        geosenseSpin .8s linear infinite;
+
+}
+
+
+@keyframes geosenseSpin {
+
+    to {
+
+        transform: rotate(360deg);
+
+    }
+
+}
