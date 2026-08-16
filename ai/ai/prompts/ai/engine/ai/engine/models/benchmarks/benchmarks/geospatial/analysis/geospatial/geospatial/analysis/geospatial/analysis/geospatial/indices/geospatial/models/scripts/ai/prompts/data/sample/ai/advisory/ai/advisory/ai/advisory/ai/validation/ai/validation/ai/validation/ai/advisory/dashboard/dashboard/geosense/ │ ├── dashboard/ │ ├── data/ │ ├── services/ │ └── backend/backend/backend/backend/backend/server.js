@@ -470,3 +470,33 @@ app.patch(
     "/api/alerts/:alertId/resolve",
     resolve
 );
+
+const {
+
+    createTask,
+
+    listTasks,
+
+    updateTaskStatus
+
+} = require(
+    "./controllers/field-task-controller"
+);
+
+
+app.post(
+    "/api/field-tasks",
+    createTask
+);
+
+
+app.get(
+    "/api/field-tasks",
+    listTasks
+);
+
+
+app.patch(
+    "/api/field-tasks/:taskId",
+    updateTaskStatus
+);
