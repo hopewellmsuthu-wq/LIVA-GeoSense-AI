@@ -28,6 +28,51 @@ app.get("/api", (req, res) => {
     });
 });
 
+
+app.get("/api/ndvi", (req, res) => {
+    const nir = Number(req.query.nir);
+    const red = Number(req.query.red);
+
+    if (!Number.isFinite(nir) || !Number.isFinite(red)) {
+        return res.status(400).json({
+            success: false,
+            error: "Provide valid nir and red values"
+        });
+    }
+
+    const denominator = nir + red;
+
+    if (denominator === 0) {
+        return res.status(400).json({
+            success: false,
+            error: "Invalid reflectance values"
+        });
+    }
+
+    const ndvi = (nir - red) / denominator;
+
+    let classification;
+
+    if (ndvi < 0) {
+        classification = "Water / Non-vegetation";
+    } else if (ndvi < 0.2) {
+        classification = "Bare soil / Sparse vegetation";
+    } else if (ndvi < 0.4) {
+        classification = "Moderate vegetation";
+    } else if (ndvi < 0.6) {
+        classification = "Healthy vegetation";
+    } else {
+        classification = "Very healthy vegetation";
+    }
+
+    res.json({
+        success: true,
+        ndvi: Number(ndvi.toFixed(4)),
+        classification,
+        inputs: { nir, red }
+    });
+});
+
 app.use(express.static(path.join(__dirname, "app")));
 
 app.get("/", (req, res) => {
